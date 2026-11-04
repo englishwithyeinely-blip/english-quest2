@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f7dce5">
+<title>English Quest | English with Yeinely</title>
+<style>
+:root{
+ --pink:#f7dce5;--pink2:#efb9cc;--sage:#dce8d8;--blue:#dceaf5;
+ --yellow:#f8ebcb;--cream:#f8f4ef;--ink:#48434a;--muted:#77717a;
+ --white:#fff;--line:#eee5e7;--green:#4d8b68;--red:#bb5d68;
+ --shadow:0 12px 35px rgba(92,66,78,.09);--radius:22px
+}
+*{box-sizing:border-box}
+body{margin:0;background:linear-gradient(135deg,#fffaf8 0%,#f8f4ef 55%,#f8f1f4 100%);color:var(--ink);font-family:Nunito,"Avenir Next",Avenir,system-ui,-apple-system,sans-serif;min-height:100vh}
+button{font:inherit;cursor:pointer}
+.app{max-width:1120px;margin:auto;padding:24px 22px 50px}
+header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:26px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:50px;height:50px;border-radius:17px;background:var(--pink);display:grid;place-items:center;font-size:27px;box-shadow:var(--shadow)}
+.brand h1{font-size:19px;line-height:1.1;margin:0;font-weight:900;letter-spacing:.2px}
+.brand small{display:block;color:var(--muted);font-size:11px;letter-spacing:1.6px;margin-top:5px;font-weight:800}
+.topstats{display:flex;gap:9px;flex-wrap:wrap;justify-content:flex-end}
+.pill{background:white;border:1px solid var(--line);border-radius:999px;padding:9px 13px;font-weight:800;font-size:13px;box-shadow:0 4px 14px rgba(92,66,78,.04)}
+.hero{background:linear-gradient(115deg,var(--pink),#f9e9e9 48%,var(--blue));border-radius:30px;padding:30px;display:grid;grid-template-columns:1.3fr .7fr;align-items:center;gap:20px;box-shadow:var(--shadow);overflow:hidden}
+.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:2px;font-weight:900;color:#966779}
+.hero h2{font-size:clamp(28px,4vw,43px);line-height:1.05;margin:10px 0 12px;letter-spacing:-1.2px}
+.hero p{margin:0;color:#625b64;line-height:1.6;max-width:540px}
+.hero-art{font-size:100px;text-align:center;filter:drop-shadow(0 12px 8px rgba(99,67,80,.12));transform:rotate(-5deg)}
+.controls{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:24px 0 17px;flex-wrap:wrap}
+.levels{display:flex;gap:8px;background:white;padding:5px;border-radius:999px;border:1px solid var(--line)}
+.level-btn,.lang-btn{border:0;background:transparent;border-radius:999px;padding:10px 17px;font-weight:900;color:var(--muted)}
+.level-btn.active{background:var(--ink);color:white}
+.lang-btn{border:1px solid var(--line);background:white}
+.section-title{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:18px 2px}
+.section-title h3{margin:0;font-size:21px}
+.section-title span{font-size:12px;color:var(--muted)}
+.games{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.game-card{border:1px solid var(--line);border-radius:var(--radius);background:white;padding:18px;text-align:left;box-shadow:0 6px 20px rgba(92,66,78,.045);transition:.18s;min-height:195px;color:var(--ink);display:flex;flex-direction:column}
+.game-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.game-icon{width:54px;height:54px;border-radius:17px;display:grid;place-items:center;font-size:28px;margin-bottom:15px}
+.game-card h4{font-size:16px;margin:0 0 6px}
+.game-card p{font-size:12px;line-height:1.45;color:var(--muted);margin:0 0 14px}
+.card-bottom{margin-top:auto;display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:900;color:#927081}
+.tag{background:#f9f1f4;padding:5px 8px;border-radius:999px}
+.panel{margin-top:22px;background:white;border:1px solid var(--line);border-radius:28px;padding:24px;box-shadow:var(--shadow);display:none}
+.panel.show{display:block}
+.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+.panel-head h3{margin:0;font-size:21px}
+.back{border:1px solid var(--line);background:#fff;border-radius:999px;padding:9px 14px;font-weight:800;color:var(--muted)}
+.progress-track{height:8px;background:#f3edf0;border-radius:99px;overflow:hidden;margin:12px 0 22px}
+.progress-fill{height:100%;width:0;background:linear-gradient(90deg,#e9a9c0,#91b99a);border-radius:99px;transition:width .25s}
+.question-meta{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;font-weight:800}
+.question{font-size:clamp(21px,3vw,29px);font-weight:900;text-align:center;margin:24px auto 10px;max-width:700px}
+.hint{text-align:center;color:var(--muted);font-size:14px;margin-bottom:22px}
+.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;max-width:720px;margin:0 auto}
+.choice{border:2px solid var(--line);background:white;border-radius:15px;padding:15px;font-weight:800;color:var(--ink);min-height:54px}
+.choice:hover{border-color:var(--pink2);background:#fff9fb}
+.choice.selected{border-color:#d88da9;background:#fff3f7}
+.choice.correct{border-color:#8db99a;background:#f0f8f1;color:#356a49}
+.choice.wrong{border-color:#d58b91;background:#fff3f3;color:#a34752}
+.action-row{display:flex;justify-content:center;gap:10px;margin-top:23px;flex-wrap:wrap}
+.primary{border:0;background:var(--ink);color:white;padding:13px 25px;border-radius:999px;font-weight:900;min-width:150px}
+.primary:disabled{opacity:.35;cursor:not-allowed}
+.secondary{border:1px solid var(--line);background:white;color:var(--ink);padding:12px 20px;border-radius:999px;font-weight:800}
+.feedback{text-align:center;font-weight:900;min-height:24px;margin-top:16px}
+.feedback.good{color:var(--green)}.feedback.bad{color:var(--red)}
+.wordbank{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:18px auto;max-width:650px;min-height:48px}
+.word{border:1px solid #eadde2;background:#fff7fa;border-radius:12px;padding:10px 13px;font-weight:800;color:var(--ink)}
+.word.used{opacity:.3;pointer-events:none}
+.answer-line{min-height:58px;border:2px dashed #e7d6dd;border-radius:16px;padding:9px;display:flex;gap:7px;justify-content:center;align-items:center;flex-wrap:wrap;max-width:700px;margin:15px auto}
+.answer-line .word{background:var(--sage);border-color:transparent}
+.result{text-align:center;padding:20px}
+.result .big{font-size:64px}
+.result h3{font-size:27px;margin:8px 0}
+.result p{color:var(--muted)}
+.result-stats{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin:18px}
+.result-stats span{background:var(--cream);padding:10px 15px;border-radius:13px;font-weight:900}
+footer{text-align:center;color:#918891;font-size:12px;margin:30px 0 0}
+.hidden{display:none!important}
+@media(max-width:850px){.games{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.app{padding:15px 13px 35px}.hero{grid-template-columns:1fr;padding:23px}.hero-art{font-size:70px;grid-row:1}.hero h2{font-size:31px}.games{grid-template-columns:1fr 1fr;gap:10px}.game-card{padding:14px;min-height:180px}.topstats{gap:5px}.pill{font-size:11px;padding:8px 10px}.brand h1{font-size:16px}.panel{padding:17px}.choices{grid-template-columns:1fr}.section-title span{display:none}}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+ <div class="brand"><div class="logo">🌸</div><div><h1>English with Yeinely</h1><small>LEARN · PRACTICE · GROW</small></div></div>
+ <div class="topstats"><div class="pill">⭐ <span id="totalPoints">0</span> points</div><div class="pill">🏆 <span id="bestScore">0</span> best</div></div>
+</header>
+<section class="hero">
+ <div><div class="eyebrow">Your little English adventure</div><h2>Welcome to<br>English Quest!</h2><p>Learn a little, practice a lot, and celebrate every step. Choose a mini-game and let’s play!</p></div>
+ <div class="hero-art" aria-hidden="true">📚✨</div>
+</section>
+<div class="controls">
+ <div class="levels" aria-label="Choose level"><button class="level-btn active" data-level="A1">A1 Beginner</button><button class="level-btn" data-level="A2">A2 Elementary</button></div>
+ <button class="lang-btn" id="langToggle">ES / EN</button>
+</div>
+<div id="home">
+ <div class="section-title"><h3 id="gamesTitle">Choose your mini-game</h3><span id="levelLabel">A1 · Beginner</span></div>
+ <div class="games">
+  <button class="game-card" data-game="vocab"><div class="game-icon" style="background:var(--pink)">🧠</div><h4>Word Explorer</h4><p>Choose the correct meaning and grow your vocabulary.</p><div class="card-bottom"><span>VOCABULARY</span><span class="tag">Play →</span></div></button>
+  <button class="game-card" data-game="grammar"><div class="game-icon" style="background:var(--sage)">✏️</div><h4>Grammar Quest</h4><p>Complete sentences and practice grammar rules.</p><div class="card-bottom"><span>GRAMMAR</span><span class="tag">Play →</span></div></button>
+  <button class="game-card" data-game="builder"><div class="game-icon" style="background:var(--blue)">🧩</div><h4>Sentence Builder</h4><p>Put the words in the right order to make a sentence.</p><div class="card-bottom"><span>WORD ORDER</span><span class="tag">Play →</span></div></button>
+  <button class="game-card" data-game="spell"><div class="game-icon" style="background:var(--yellow)">🔤</div><h4>Spell It!</h4><p>Choose the correct spelling of everyday words.</p><div class="card-bottom"><span>SPELLING</span><span class="tag">Play →</span></div></button>
+ </div>
+</div>
+<section class="panel" id="gamePanel">
+ <div class="panel-head"><h3 id="gameTitle">Mini-game</h3><button class="back" id="backBtn">← <span id="backText">All games</span></button></div>
+ <div id="playArea">
+  <div class="question-meta"><span id="questionCount">Question 1 of 5</span><span id="roundScore">⭐ 0</span></div>
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="question" id="question"></div><div class="hint" id="hint"></div>
+  <div id="answerArea"></div>
+  <div class="feedback" id="feedback" aria-live="polite"></div>
+  <div class="action-row"><button class="primary" id="checkBtn" disabled>Check answer</button><button class="secondary hidden" id="nextBtn">Next →</button></div>
+ </div>
+ <div class="result hidden" id="resultArea"></div>
+</section>
+<footer>English with Yeinely · Small steps make a great progress. 💗</footer>
+</div>
+<script>
+const bank={
+ A1:{
+ vocab:[
+  {q:"What does “apple” mean?",hint:"🍎",opts:["Manzana","Casa","Perro","Libro"],a:0},
+  {q:"Choose the meaning of “happy”.",hint:"😊",opts:["Triste","Feliz","Cansado","Enojado"],a:1},
+  {q:"What is “teacher” in Spanish?",hint:"👩‍🏫",opts:["Doctor","Estudiante","Profesor/a","Amigo/a"],a:2},
+  {q:"Choose the meaning of “blue”.",hint:"💙",opts:["Verde","Rojo","Amarillo","Azul"],a:3},
+  {q:"What does “book” mean?",hint:"📖",opts:["Mesa","Libro","Silla","Ventana"],a:1},
+  {q:"What is “water” in Spanish?",hint:"💧",opts:["Agua","Leche","Pan","Jugo"],a:0}
+ ],
+ grammar:[
+  {q:"I ___ a student.",hint:"Verb to be · Present",opts:["am","is","are","be"],a:0},
+  {q:"She ___ my sister.",hint:"Verb to be · Present",opts:["am","are","is","be"],a:2},
+  {q:"They ___ from Guatemala.",hint:"Verb to be · Present",opts:["is","am","are","be"],a:2},
+  {q:"He ___ coffee every morning.",hint:"Present Simple",opts:["drink","drinks","drinking","drank"],a:1},
+  {q:"I have ___ orange.",hint:"Articles · A / An",opts:["a","an","the","—"],a:1},
+  {q:"We ___ English on Mondays.",hint:"Present Simple",opts:["study","studies","studying","studied"],a:0}
+ ],
+ builder:[
+  {q:"Build the sentence:",hint:"Yo soy una estudiante.",words:["am","I","student","a"],answer:["I","am","a","student"]},
+  {q:"Build the sentence:",hint:"Ella vive en Guatemala.",words:["Guatemala","in","lives","She"],answer:["She","lives","in","Guatemala"]},
+  {q:"Build the sentence:",hint:"Ellos son felices.",words:["happy","are","They"],answer:["They","are","happy"]},
+  {q:"Build the sentence:",hint:"Me gusta la música.",words:["music","like","I"],answer:["I","like","music"]},
+  {q:"Build the sentence:",hint:"Él tiene un perro.",words:["dog","a","has","He"],answer:["He","has","a","dog"]}
+ ],
+ spell:[
+  {q:"Which word is spelled correctly?",hint:"🐱 A small pet that says meow.",opts:["Cat","Kat","Catt","Cet"],a:0},
+  {q:"Which word is spelled correctly?",hint:"🏠 A place where you live.",opts:["Hous","House","Howse","Hause"],a:1},
+  {q:"Which word is spelled correctly?",hint:"🌞 The star we see during the day.",opts:["Sunn","Son","Sun","Sune"],a:2},
+  {q:"Which word is spelled correctly?",hint:"🍌 A yellow fruit.",opts:["Bannana","Banana","Bananna","Benana"],a:1},
+  {q:"Which word is spelled correctly?",hint:"💧 You drink it every day.",opts:["Watter","Woter","Water","Watre"],a:2}
+ ]},
+ A2:{
+ vocab:[
+  {q:"What does “crowded” mean?",hint:"🚌👥",opts:["Vacío","Lleno de gente","Silencioso","Limpio"],a:1},
+  {q:"Choose the meaning of “borrow”.",hint:"📚",opts:["Prestar (recibir prestado)","Comprar","Romper","Olvidar"],a:0},
+  {q:"What is “improve” in Spanish?",hint:"📈",opts:["Empeorar","Mejorar","Explicar","Comparar"],a:1},
+  {q:"Choose the meaning of “usually”.",hint:"🗓️",opts:["Nunca","Raramente","Usualmente","Ayer"],a:2},
+  {q:"What does “journey” mean?",hint:"🧳",opts:["Viaje","Trabajo","Desayuno","Reunión"],a:0},
+  {q:"What is “careful” in Spanish?",hint:"⚠️",opts:["Descuidado","Cuidadoso","Aburrido","Ruidoso"],a:1}
+ ],
+ grammar:[
+  {q:"She has lived here ___ 2020.",hint:"Present Perfect · since / for",opts:["for","since","during","from"],a:1},
+  {q:"There isn't ___ milk in the fridge.",hint:"Some / any",opts:["some","many","any","a few"],a:2},
+  {q:"This book is ___ than that one.",hint:"Comparatives",opts:["interesting","more interesting","most interesting","the interesting"],a:1},
+  {q:"If it rains, we ___ at home.",hint:"First Conditional",opts:["stay","stayed","will stay","staying"],a:2},
+  {q:"I ___ to the cinema yesterday.",hint:"Past Simple",opts:["go","went","gone","going"],a:1},
+  {q:"You ___ wear a seat belt.",hint:"Modal verbs · Obligation",opts:["shouldn't","must","might","couldn't"],a:1}
+ ],
+ builder:[
+  {q:"Build the sentence:",hint:"Nunca he visitado Londres.",words:["London","never","I've","visited"],answer:["I've","never","visited","London"]},
+  {q:"Build the sentence:",hint:"Si estudio, aprobaré el examen.",words:["pass","I","study","the exam","will","If"],answer:["If","I","study","I","will","pass","the exam"],displayWords:["If","I","study","I","will","pass","the exam"]},
+  {q:"Build the sentence:",hint:"Ella estaba cocinando cuando llamé.",words:["cooking","called","was","I","She","when"],answer:["She","was","cooking","when","I","called"]},
+  {q:"Build the sentence:",hint:"Este ejercicio es más fácil que el otro.",words:["than","easier","the other one","This exercise","is"],answer:["This exercise","is","easier","than","the other one"]},
+  {q:"Build the sentence:",hint:"Deberías practicar todos los días.",words:["every day","practice","You","should"],answer:["You","should","practice","every day"]}
+ ],
+ spell:[
+  {q:"Which word is spelled correctly?",hint:"To make something better.",opts:["Improve","Impruve","Improv","Improvve"],a:0},
+  {q:"Which word is spelled correctly?",hint:"A person who travels.",opts:["Travaler","Traveller","Travelar","Travellor"],a:1},
+  {q:"Which word is spelled correctly?",hint:"Something that happens often.",opts:["Occasionally","Ocasionally","Occassionaly","Ocationally"],a:0},
+  {q:"Which word is spelled correctly?",hint:"A place where you can borrow books.",opts:["Libary","Library","Librery","Liberry"],a:1},
+  {q:"Which word is spelled correctly?",hint:"The opposite of “expensive”.",opts:["Cheep","Cheep","Cheap","Cheape"],a:2}
+ ]}
+};
+const titles={vocab:"🧠 Word Explorer",grammar:"✏️ Grammar Quest",builder:"🧩 Sentence Builder",spell:"🔤 Spell It!"};
+let level="A1",game="",questions=[],index=0,score=0,selected=null,locked=false,chosenWords=[],lang="en";
+let total=Number(localStorage.getItem("eq_total")||0),best=Number(localStorage.getItem("eq_best")||0);
+const $=id=>document.getElementById(id);
+function stats(){$("totalPoints").textContent=total;$("bestScore").textContent=best}
+stats();
+document.querySelectorAll(".level-btn").forEach(b=>b.addEventListener("click",()=>{level=b.dataset.level;document.querySelectorAll(".level-btn").forEach(x=>x.classList.toggle("active",x===b));$("levelLabel").textContent=level+(level==="A1"?" · Beginner":" · Elementary")}));
+document.querySelectorAll(".game-card").forEach(b=>b.addEventListener("click",()=>startGame(b.dataset.game)));
+$("backBtn").addEventListener("click",goHome);$("checkBtn").addEventListener("click",check);$("nextBtn").addEventListener("click",next);
+$("langToggle").addEventListener("click",()=>{lang=lang==="en"?"es":"en";$("gamesTitle").textContent=lang==="en"?"Choose your mini-game":"Elige tu minijuego";$("backText").textContent=lang==="en"?"All games":"Todos los juegos";$("langToggle").textContent=lang==="en"?"ES / EN":"EN / ES"});
+function startGame(type){game=type;questions=[...bank[level][type]].sort(()=>Math.random()-.5).slice(0,5);index=0;score=0;$("home").classList.add("hidden");$("gamePanel").classList.add("show");$("playArea").classList.remove("hidden");$("resultArea").classList.add("hidden");$("gameTitle").textContent=titles[type];render()}
+function render(){selected=null;locked=false;chosenWords=[];$("feedback").textContent="";$("feedback").className="feedback";$("checkBtn").disabled=true;$("checkBtn").classList.remove("hidden");$("nextBtn").classList.add("hidden");$("questionCount").textContent=`Question ${index+1} of ${questions.length}`;$("roundScore").textContent="⭐ "+score;$("progressFill").style.width=(index/questions.length*100)+"%";
+let q=questions[index];$("question").textContent=q.q;$("hint").textContent=q.hint||"";
+let area=$("answerArea");area.innerHTML="";
+if(game==="builder"){let line=document.createElement("div");line.className="answer-line";line.id="answerLine";let bank=document.createElement("div");bank.className="wordbank";let words=q.displayWords||q.words;words.forEach((w,i)=>{let btn=document.createElement("button");btn.className="word";btn.textContent=w;btn.addEventListener("click",()=>{if(locked||btn.classList.contains("used"))return;btn.classList.add("used");chosenWords.push({word:w,source:btn});let chip=document.createElement("button");chip.className="word";chip.textContent=w;chip.title="Tap to remove";chip.addEventListener("click",()=>{chosenWords=chosenWords.filter(x=>x.chip!==chip);btn.classList.remove("used");chip.remove();$("checkBtn").disabled=chosenWords.length===0});chosenWords[chosenWords.length-1].chip=chip;line.appendChild(chip);$("checkBtn").disabled=false});bank.appendChild(btn)});area.appendChild(line);area.appendChild(bank)}
+else{let choices=document.createElement("div");choices.className="choices";q.opts.forEach((opt,i)=>{let btn=document.createElement("button");btn.className="choice";btn.textContent=opt;btn.addEventListener("click",()=>{if(locked)return;selected=i;[...choices.children].forEach(c=>c.classList.remove("selected"));btn.classList.add("selected");$("checkBtn").disabled=false});choices.appendChild(btn)});area.appendChild(choices)}
+}
+function check(){if(locked)return;let q=questions[index],correct=false;
+if(game==="builder"){let got=chosenWords.map(x=>x.word).join(" ");let expected=q.answer.join(" ");correct=got===expected}
+else correct=selected===q.a;
+locked=true;if(correct){score+=10;total+=10;localStorage.setItem("eq_total",total);$("feedback").textContent="Excellent! That's correct! ⭐";$("feedback").className="feedback good"}else{$("feedback").textContent="Good try! Correct answer: "+(game==="builder"?q.answer.join(" "):q.opts[q.a]);$("feedback").className="feedback bad"}
+if(game!=="builder"){let buttons=$("answerArea").querySelectorAll(".choice");buttons.forEach((b,i)=>{if(i===q.a)b.classList.add("correct");else if(i===selected)b.classList.add("wrong")})}
+$("roundScore").textContent="⭐ "+score;$("checkBtn").classList.add("hidden");$("nextBtn").classList.remove("hidden");$("nextBtn").textContent=index===questions.length-1?"See results":"Next →";stats()}
+function next(){index++;if(index>=questions.length){finish();return}render()}
+function finish(){best=Math.max(best,score);localStorage.setItem("eq_best",best);stats();$("playArea").classList.add("hidden");let pct=Math.round(score/(questions.length*10)*100);$("resultArea").classList.remove("hidden");$("resultArea").innerHTML=`<div class="big">${pct>=80?"🏆":pct>=50?"🌟":"🌷"}</div><h3>${pct>=80?"Amazing work!":pct>=50?"Great effort!":"Keep practicing!"}</h3><p>You completed ${titles[game]} · ${level}</p><div class="result-stats"><span>⭐ ${score} / ${questions.length*10} points</span><span>🎯 ${pct}% correct</span></div><p>${pct>=80?"You are making wonderful progress.": "Every little step helps you grow. Try again to improve your score!"}</p><div class="action-row"><button class="primary" id="again">Play again</button><button class="secondary" id="gamesAgain">Choose another game</button></div>`;$("again").addEventListener("click",()=>startGame(game));$("gamesAgain").addEventListener("click",goHome)}
+function goHome(){$("gamePanel").classList.remove("show");$("home").classList.remove("hidden");$("playArea").classList.remove("hidden");$("resultArea").classList.add("hidden");game=""}
+</script>
+</body>
+</html>
