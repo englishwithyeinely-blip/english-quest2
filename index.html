@@ -87,7 +87,7 @@ footer{text-align:center;color:#918891;font-size:12px;margin:30px 0 0}
 body{background:linear-gradient(135deg,#fff8fc 0%,#fff2f9 55%,#f0f7ff 100%);color:var(--ink)}
 .app{max-width:1240px;padding:24px 28px 48px}
 header{padding:8px 0 18px;border-bottom:1px solid #f2dce9;margin-bottom:30px}
-.brand{gap:13px}.logo{width:58px;height:58px;border-radius:50%;background:linear-gradient(145deg,#fff,#f8d3e8);border:2px solid #f1a9d0;color:#064b9b;text-decoration:none;font-size:40px;font-weight:900;box-shadow:0 7px 20px rgba(214,89,155,.13)}
+.brand{gap:13px}.logo{width:66px;height:66px;flex:0 0 66px;border-radius:50%;overflow:hidden;background:#fff;border:2px solid #f1a9d0;box-shadow:0 7px 20px rgba(214,89,155,.13);display:block}.logo img{display:block;width:100%;height:100%;object-fit:contain}
 .brand h1{font-size:22px;color:#073a83}.brand h1 span{display:block;color:#e34898}.brand small{color:#7d7590;letter-spacing:2px}
 .site-link{color:#064b9b;text-decoration:none;font-weight:900;font-size:13px;border:1px solid #e8dce9;background:#fff;border-radius:999px;padding:10px 16px}
 .topstats .pill{color:#073a83;border-color:#e7eaf4;box-shadow:0 5px 16px rgba(32,67,125,.06)}
@@ -136,7 +136,7 @@ footer{color:#8b7890}
 <body>
 <div class="app">
 <header>
- <div class="brand"><a class="logo" href="https://english-with-yeinely.englishwithyeinely.workers.dev/" aria-label="English with Yeinely home">♡</a><div><h1>English <span>with Yeinely</span></h1><small>LEARN · PRACTICE · GROW</small></div></div><a class="site-link" href="https://english-with-yeinely.englishwithyeinely.workers.dev/">← Main website</a>
+ <div class="brand"><a class="logo" href="https://english-with-yeinely.englishwithyeinely.workers.dev/" aria-label="English with Yeinely home"><img src="https://english-with-yeinely.englishwithyeinely.workers.dev/logo.png.png" alt="English with Yeinely logo"></a><div><h1>English <span>with Yeinely</span></h1><small>LEARN · PRACTICE · GROW</small></div></div><a class="site-link" href="https://english-with-yeinely.englishwithyeinely.workers.dev/">← Main website</a>
  <div class="topstats"><div class="pill">⭐ <span id="totalPoints">0</span> points</div><div class="pill">🏆 <span id="bestScore">0</span> best</div></div>
 </header>
 <section class="hero">
@@ -144,7 +144,7 @@ footer{color:#8b7890}
  <div class="quest-preview" aria-label="English Quest learning levels"><div class="preview-spark">✦</div><div class="preview-kicker">YOUR LEARNING ADVENTURE</div><div class="preview-title">ENGLISH QUEST</div><p>Choose your level</p><div class="preview-levels"><span>A1</span><span>A2</span><span>B1</span></div><div class="preview-footer">🏆 Every small step counts!</div></div>
 </section>
 <div class="controls">
- <div class="levels" aria-label="Choose level"><button class="level-btn active" data-level="A1">A1 Beginner</button><button class="level-btn" data-level="A2">A2 Elementary</button></div>
+ <div class="levels" aria-label="Choose level"><button class="level-btn active" data-level="A1">A1 Beginner</button><button class="level-btn" data-level="A2">A2 Elementary</button><button class="level-btn" data-level="B1">B1 Intermediate</button></div>
  <button class="lang-btn" id="langToggle">ES / EN</button>
 </div>
 <div id="home">
@@ -234,6 +234,36 @@ const bank={
   {q:"Which word is spelled correctly?",hint:"A place where you can borrow books.",opts:["Libary","Library","Librery","Liberry"],a:1},
   {q:"Which word is spelled correctly?",hint:"The opposite of “expensive”.",opts:["Cheep","Cheep","Cheap","Cheape"],a:2}
  ]}
+,
+ B1:{
+ vocab:[
+  {q:"What does “reliable” mean?",hint:"A person you can trust.",opts:["Confiable","Impaciente","Ruidoso","Tímido"],a:0},
+  {q:"Choose the meaning of “achievement”.",hint:"🏆",opts:["Desafío","Logro","Fracaso","Consejo"],a:1},
+  {q:"What is “environment” in Spanish?",hint:"🌳",opts:["Comportamiento","Medio ambiente","Entretenimiento","Vecindario"],a:1},
+  {q:"Choose the meaning of “to avoid”.",hint:"",opts:["Aceptar","Evitar","Mejorar","Aprovechar"],a:1},
+  {q:"What does “although” mean?",hint:"",opts:["Por lo tanto","A menos que","Aunque","Además"],a:2}
+ ],
+ grammar:[
+  {q:"If I ___ more time, I would learn another language.",hint:"Second Conditional",opts:["have","had","will have","would have"],a:1},
+  {q:"The new bridge ___ next year.",hint:"Passive Voice · Future",opts:["will build","will be built","is building","built"],a:1},
+  {q:"She asked me where I ___.",hint:"Reported Questions",opts:["live","do live","lived","am living"],a:2},
+  {q:"By the time we arrived, the film ___.",hint:"Past Perfect",opts:["starts","has started","had started","was starting"],a:2},
+  {q:"You ___ have told me earlier; I could have helped.",hint:"Modal Perfect",opts:["should","must","can","may"],a:0}
+ ],
+ builder:[
+  {q:"Build the sentence:",hint:"A pesar de la lluvia, disfrutamos el viaje.",words:["the trip","Despite","we","enjoyed","the rain"],answer:["Despite","the rain","we","enjoyed","the trip"]},
+  {q:"Build the sentence:",hint:"Ella lleva trabajando aquí desde 2021.",words:["been","She","here","working","has","since 2021"],answer:["She","has","been","working","here","since 2021"]},
+  {q:"Build the sentence:",hint:"El libro que me recomendaste fue fascinante.",words:["recommended","The book","was","me","you","fascinating"],answer:["The book","you","recommended","me","was","fascinating"]},
+  {q:"Build the sentence:",hint:"No solo habla inglés, sino que también habla francés.",words:["English","but","speaks","also","not only","French","She"],answer:["She","not only","speaks","English","but","also","French"]},
+  {q:"Build the sentence:",hint:"Si hubiera sabido, te habría llamado.",words:["If","I","had","known","I","would","have","called","you"],answer:["If","I","had","known","I","would","have","called","you"]}
+ ],
+ spell:[
+  {q:"Which word is spelled correctly?",hint:"Able to be trusted or depended on.",opts:["Relaiable","Reliable","Releyable","Relieable"],a:1},
+  {q:"Which word is spelled correctly?",hint:"A result or success achieved through effort.",opts:["Acheivement","Achievment","Achievement","Acheivment"],a:2},
+  {q:"Which word is spelled correctly?",hint:"The natural world around us.",opts:["Enviroment","Environmant","Environment","Envirenment"],a:2},
+  {q:"Which word is spelled correctly?",hint:"To make something less severe or serious.",opts:["Alleviate","Aleviate","Alleveate","Alleviat"],a:0},
+  {q:"Which word is spelled correctly?",hint:"A discussion where people exchange ideas.",opts:["Debait","Debate","Debatte","Deabte"],a:1}
+ ]}
 };
 const titles={vocab:"🧠 Word Explorer",grammar:"✏️ Grammar Quest",builder:"🧩 Sentence Builder",spell:"🔤 Spell It!"};
 let level="A1",game="",questions=[],index=0,score=0,selected=null,locked=false,chosenWords=[],lang="en";
@@ -241,7 +271,7 @@ let total=Number(localStorage.getItem("eq_total")||0),best=Number(localStorage.g
 const $=id=>document.getElementById(id);
 function stats(){$("totalPoints").textContent=total;$("bestScore").textContent=best}
 stats();
-document.querySelectorAll(".level-btn").forEach(b=>b.addEventListener("click",()=>{level=b.dataset.level;document.querySelectorAll(".level-btn").forEach(x=>x.classList.toggle("active",x===b));$("levelLabel").textContent=level+(level==="A1"?" · Beginner":" · Elementary")}));
+document.querySelectorAll(".level-btn").forEach(b=>b.addEventListener("click",()=>{level=b.dataset.level;document.querySelectorAll(".level-btn").forEach(x=>x.classList.toggle("active",x===b));$("levelLabel").textContent=level+(level==="A1"?" · Beginner":level==="A2"?" · Elementary":" · Intermediate")}));
 document.querySelectorAll(".game-card").forEach(b=>b.addEventListener("click",()=>startGame(b.dataset.game)));
 $("backBtn").addEventListener("click",goHome);$("checkBtn").addEventListener("click",check);$("nextBtn").addEventListener("click",next);
 $("langToggle").addEventListener("click",()=>{lang=lang==="en"?"es":"en";$("gamesTitle").textContent=lang==="en"?"Choose your mini-game":"Elige tu minijuego";$("backText").textContent=lang==="en"?"All games":"Todos los juegos";$("langToggle").textContent=lang==="en"?"ES / EN":"EN / ES"});
