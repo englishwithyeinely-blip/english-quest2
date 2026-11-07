@@ -305,6 +305,149 @@ const bank={
   {q:"Which word is spelled correctly?",hint:"A discussion where people exchange ideas.",opts:["Debait","Debate","Debatte","Deabte"],a:1}
  ]}
 };
+
+/* Expanded curriculum bank: topic-rich practice across all four levels.
+   Existing questions remain available; these additions are mixed into each round. */
+bank.PREA1.vocab.push(
+ {q:"What does “father” mean?",hint:"👨 Family",opts:["Padre","Tío","Primo","Hermano"],a:0},
+ {q:"What is “green” in Spanish?",hint:"🟢 A color",opts:["Rojo","Verde","Negro","Blanco"],a:1},
+ {q:"What does “chair” mean?",hint:"🪑 In the classroom",opts:["Ventana","Puerta","Silla","Pizarra"],a:2},
+ {q:"What is “three” in Spanish?",hint:"🔢 Number 3",opts:["Cinco","Cuatro","Dos","Tres"],a:3},
+ {q:"What does “sister” mean?",hint:"👧 Family",opts:["Madre","Hermana","Abuela","Hija"],a:1},
+ {q:"What is “milk” in Spanish?",hint:"🥛 A drink",opts:["Agua","Pan","Leche","Arroz"],a:2},
+ {q:"What does “bird” mean?",hint:"🐦 An animal",opts:["Pájaro","Pez","Gato","Caballo"],a:0},
+ {q:"What is “thank you” in Spanish?",hint:"💗 A polite expression",opts:["Por favor","Perdón","De nada","Gracias"],a:3}
+);
+bank.PREA1.grammar.push(
+ {q:"He ___ my friend.",hint:"Verb to be · He",opts:["am","are","is","be"],a:2},
+ {q:"We ___ happy.",hint:"Verb to be · We",opts:["is","are","am","be"],a:1},
+ {q:"This is ___ orange.",hint:"A / An",opts:["a","an","the","is"],a:1},
+ {q:"I ___ a student.",hint:"Have / Has",opts:["has","having","have","am"],a:2},
+ {q:"Two ___ are on the table.",hint:"Plural nouns",opts:["pen","pens","penes","a pen"],a:1},
+ {q:"___ is my brother.",hint:"This / These",opts:["These","They","This","Those"],a:2},
+ {q:"She is ___ teacher.",hint:"Possessive adjective",opts:["I","my","me","mine"],a:1},
+ {q:"Are you a student? Yes, I ___.",hint:"Short answers · Be",opts:["am","is","are","be"],a:0}
+);
+bank.PREA1.builder.push(
+ {q:"Build the sentence:",hint:"Ella es mi amiga.",words:["friend","my","is","She"],answer:["She","is","my","friend"]},
+ {q:"Build the sentence:",hint:"Tengo un gato.",words:["a","have","cat","I"],answer:["I","have","a","cat"]},
+ {q:"Build the sentence:",hint:"Este es un libro.",words:["book","a","is","This"],answer:["This","is","a","book"]},
+ {q:"Build the sentence:",hint:"Él está feliz.",words:["happy","is","He"],answer:["He","is","happy"]},
+ {q:"Build the sentence:",hint:"Nosotros somos estudiantes.",words:["students","are","We"],answer:["We","are","students"]}
+);
+bank.PREA1.spell.push(
+ {q:"Which word is spelled correctly?",hint:"👋 A greeting",opts:["Helo","Hello","Hollo","Hellou"],a:1},
+ {q:"Which word is spelled correctly?",hint:"👩 Your female parent",opts:["Moter","Mother","Muthur","Mothar"],a:1},
+ {q:"Which word is spelled correctly?",hint:"📘 Something you read",opts:["Book","Bok","Boock","Bouk"],a:0},
+ {q:"Which word is spelled correctly?",hint:"🐟 An animal that swims",opts:["Fisch","Fesh","Fish","Phish"],a:2},
+ {q:"Which word is spelled correctly?",hint:"💧 A drink",opts:["Watter","Water","Woter","Watre"],a:1}
+);
+
+bank.A1.vocab.push(
+ {q:"What does “breakfast” mean?",hint:"🍳 A morning meal",opts:["Almuerzo","Cena","Desayuno","Merienda"],a:2},
+ {q:"Choose the meaning of “usually”.",hint:"🗓️ Frequency",opts:["Nunca","Usualmente","Raramente","Ayer"],a:1},
+ {q:"What is “library” in Spanish?",hint:"📚 A place for books",opts:["Biblioteca","Hospital","Cocina","Parque"],a:0},
+ {q:"What does “expensive” mean?",hint:"💳 About price",opts:["Barato","Gratis","Caro","Pequeño"],a:2},
+ {q:"Choose the meaning of “early”.",hint:"⏰ Before the usual time",opts:["Tarde","Temprano","Lento","Siempre"],a:1},
+ {q:"What is “neighbour” in Spanish?",hint:"🏡 Someone who lives nearby",opts:["Compañero","Vecino/a","Jefe","Cliente"],a:1},
+ {q:"What does “sometimes” mean?",hint:"📅 Frequency",opts:["A veces","Siempre","Nunca","Todos los días"],a:0},
+ {q:"Choose the meaning of “weather”.",hint:"🌦️ Sun, rain, wind...",opts:["Estación","Tiempo atmosférico","Vacaciones","Paisaje"],a:1}
+);
+bank.A1.grammar.push(
+ {q:"My brother ___ football on Saturdays.",hint:"Present Simple · He / She / It",opts:["play","plays","playing","is play"],a:1},
+ {q:"They ___ watching TV now.",hint:"Present Continuous",opts:["is","am","are","be"],a:2},
+ {q:"There ___ two bedrooms in my house.",hint:"There is / There are",opts:["is","are","am","be"],a:1},
+ {q:"We ___ visit our grandparents tomorrow.",hint:"Be going to",opts:["are going to","going","is going","go to"],a:0},
+ {q:"I ___ at home yesterday.",hint:"Past Simple · Be",opts:["were","was","am","be"],a:1},
+ {q:"How ___ apples do you need?",hint:"Countable nouns · How much / many",opts:["much","many","any","some"],a:1},
+ {q:"This is ___ bag. It belongs to me.",hint:"Possessive adjectives",opts:["mine","my","me","I"],a:1},
+ {q:"She doesn't ___ coffee.",hint:"Present Simple · Negative",opts:["likes","liking","like","liked"],a:2}
+);
+bank.A1.builder.push(
+ {q:"Build the sentence:",hint:"Mi madre trabaja en un hospital.",words:["hospital","works","mother","a","My","in"],answer:["My","mother","works","in","a","hospital"]},
+ {q:"Build the sentence:",hint:"Estamos estudiando inglés ahora.",words:["English","are","now","We","studying"],answer:["We","are","studying","English","now"]},
+ {q:"Build the sentence:",hint:"¿A qué hora te levantas?",words:["do","What","get","time","up","you"],answer:["What","time","do","you","get","up"]},
+ {q:"Build the sentence:",hint:"Ayer visité a mis amigos.",words:["friends","visited","I","yesterday","my"],answer:["I","visited","my","friends","yesterday"]},
+ {q:"Build the sentence:",hint:"Hay una farmacia cerca de aquí.",words:["a","There","near","is","pharmacy","here"],answer:["There","is","a","pharmacy","near","here"]}
+);
+bank.A1.spell.push(
+ {q:"Which word is spelled correctly?",hint:"🍳 The first meal of the day",opts:["Breakfest","Breakfast","Breackfast","Brekfast"],a:1},
+ {q:"Which word is spelled correctly?",hint:"📚 A place where you borrow books",opts:["Library","Libary","Librery","Liberry"],a:0},
+ {q:"Which word is spelled correctly?",hint:"🌧️ Water falling from clouds",opts:["Raine","Rain","Rayn","Reign"],a:1},
+ {q:"Which word is spelled correctly?",hint:"🏥 A place where doctors work",opts:["Hospitel","Hostipal","Hospital","Hospitol"],a:2},
+ {q:"Which word is spelled correctly?",hint:"👨‍👩‍👧 People in your family",opts:["Famly","Familly","Family","Famely"],a:2}
+);
+
+bank.A2.vocab.push(
+ {q:"What does “appointment” mean?",hint:"📅 A planned meeting",opts:["Cita","Descuento","Equipaje","Receta"],a:0},
+ {q:"Choose the meaning of “environment”.",hint:"🌍 Nature and surroundings",opts:["Medio ambiente","Entretenimiento","Comportamiento","Vecindario"],a:0},
+ {q:"What is “to afford” in Spanish?",hint:"💰 Have enough money for something",opts:["Prestar","Poder permitirse","Ahorrar","Gastar"],a:1},
+ {q:"Choose the meaning of “instead of”.",hint:"🔁 In place of something",opts:["Además de","A pesar de","En vez de","Debido a"],a:2},
+ {q:"What does “achievement” mean?",hint:"🏅 Something successfully completed",opts:["Logro","Fracaso","Riesgo","Retraso"],a:0},
+ {q:"What is “recycling” in Spanish?",hint:"♻️ Using materials again",opts:["Contaminación","Reciclaje","Deforestación","Consumo"],a:1},
+ {q:"Choose the meaning of “reliable”.",hint:"🤝 Someone you can trust",opts:["Confiable","Impaciente","Desordenado","Tímido"],a:0},
+ {q:"What does “complain” mean?",hint:"🗣️ Say you are unhappy about something",opts:["Agradecer","Quejarse","Prometer","Aconsejar"],a:1}
+);
+bank.A2.grammar.push(
+ {q:"I was tired because I ___ all day.",hint:"Past Continuous",opts:["work","was working","have worked","am working"],a:1},
+ {q:"Have you ever ___ sushi?",hint:"Present Perfect · Past participle",opts:["eat","ate","eaten","eating"],a:2},
+ {q:"We have known each other ___ five years.",hint:"Since / For",opts:["since","for","during","from"],a:1},
+ {q:"The train ___ before we arrived.",hint:"Past Perfect",opts:["leaves","has left","had left","was leaving"],a:2},
+ {q:"You look ill. You ___ see a doctor.",hint:"Should / Shouldn't",opts:["should","mustn't","would","might not"],a:0},
+ {q:"If I finish early, I ___ you.",hint:"First Conditional",opts:["called","call","will call","would call"],a:2},
+ {q:"This is the ___ restaurant in town.",hint:"Superlatives",opts:["better","best","good","more good"],a:1},
+ {q:"The email ___ yesterday.",hint:"Past Simple Passive",opts:["sent","was sent","is sending","has send"],a:1}
+);
+bank.A2.builder.push(
+ {q:"Build the sentence:",hint:"Nunca he probado la comida tailandesa.",words:["Thai","I've","food","never","tried"],answer:["I've","never","tried","Thai","food"]},
+ {q:"Build the sentence:",hint:"Estábamos caminando cuando empezó a llover.",words:["raining","started","We","when","walking","were","it"],answer:["We","were","walking","when","it","started","raining"]},
+ {q:"Build the sentence:",hint:"Si tuviera más tiempo, aprendería francés.",words:["French","more","I","had","If","learn","would","time"],answer:["If","I","had","more","time","I","would","learn","French"]},
+ {q:"Build the sentence:",hint:"El vuelo ha sido cancelado debido al mal tiempo.",words:["cancelled","bad","The","because","weather","flight","of","has","been"],answer:["The","flight","has","been","cancelled","because","of","the","bad","weather"]},
+ {q:"Build the sentence:",hint:"Deberías haber reservado una mesa.",words:["a","You","booked","table","should","have"],answer:["You","should","have","booked","a","table"]}
+);
+bank.A2.spell.push(
+ {q:"Which word is spelled correctly?",hint:"📅 An arranged meeting",opts:["Apointment","Appointment","Appoitment","Appoinment"],a:1},
+ {q:"Which word is spelled correctly?",hint:"♻️ Processing used materials",opts:["Recycling","Recyclying","Recyling","Recyclinng"],a:0},
+ {q:"Which word is spelled correctly?",hint:"🏅 Something you achieve",opts:["Acheivement","Achievement","Achievment","Acheivment"],a:1},
+ {q:"Which word is spelled correctly?",hint:"🤝 Able to be trusted",opts:["Relaiable","Reliable","Relieable","Releyable"],a:1},
+ {q:"Which word is spelled correctly?",hint:"💰 To have enough money for something",opts:["Afford","Aford","Affoard","Afoard"],a:0}
+);
+
+bank.B1.vocab.push(
+ {q:"What does “to tackle an issue” mean?",hint:"🧩 Deal with a problem",opts:["Abordar un problema","Evitar una reunión","Crear confusión","Posponer una tarea"],a:0},
+ {q:"Choose the meaning of “overwhelming”.",hint:"🌊 Too intense or difficult to manage",opts:["Alentador","Abrumador","Predecible","Conveniente"],a:1},
+ {q:"What is “to raise awareness” in Spanish?",hint:"📢 Help people understand an issue",opts:["Crear conciencia","Ocultar información","Cambiar de opinión","Llegar a un acuerdo"],a:0},
+ {q:"Choose the meaning of “drawback”.",hint:"⚖️ A disadvantage",opts:["Beneficio","Desventaja","Objetivo","Resultado"],a:1},
+ {q:"What does “to take something for granted” mean?",hint:"💭 Fail to appreciate its value",opts:["Dar algo por sentado","Tomar una decisión","Hacer una promesa","Aprovechar una oportunidad"],a:0},
+ {q:"Choose the meaning of “whereas”.",hint:"↔️ Contrast two facts",opts:["Por lo tanto","Mientras que","A pesar de","Siempre que"],a:1},
+ {q:"What is “sustainable” in Spanish?",hint:"🌱 Can continue without damaging resources",opts:["Sostenible","Temporal","Costoso","Artificial"],a:0},
+ {q:"What does “to persuade” mean?",hint:"🗣️ Make someone agree or act",opts:["Persuadir","Advertir","Rechazar","Investigar"],a:0}
+);
+bank.B1.grammar.push(
+ {q:"I wish I ___ more confident when speaking in public.",hint:"Wish · Present situation",opts:["am","were","will be","have been"],a:1},
+ {q:"Hardly ___ the meeting started when the fire alarm rang.",hint:"Inversion after negative adverbials",opts:["had","has","did","was"],a:0},
+ {q:"She suggested ___ the deadline.",hint:"Verb patterns · Suggest",opts:["to extend","extend","extending","extended"],a:2},
+ {q:"The report, ___ was published yesterday, caused debate.",hint:"Defining / Non-defining relative clauses",opts:["that","who","which","where"],a:2},
+ {q:"If they had left earlier, they ___ the train.",hint:"Third Conditional",opts:["would catch","would have caught","will catch","had caught"],a:1},
+ {q:"You needn't ___ all the food; there was plenty.",hint:"Modal perfect · Lack of necessity",opts:["buy","bought","have bought","buying"],a:2},
+ {q:"He denied ___ the confidential file.",hint:"Gerund after deny",opts:["to open","opening","open","opened"],a:1},
+ {q:"By next June, I ___ here for ten years.",hint:"Future Perfect Continuous",opts:["will work","will have been working","am working","have worked"],a:1}
+);
+bank.B1.builder.push(
+ {q:"Build the sentence:",hint:"A pesar de las dificultades, el proyecto tuvo éxito.",words:["Despite","the","project","was","difficulties","successful"],answer:["Despite","the","difficulties","the","project","was","successful"]},
+ {q:"Build the sentence:",hint:"Si hubiera sabido la verdad, habría actuado de otra manera.",words:["the","If","truth","I","known","would","differently","have","acted","had"],answer:["If","I","had","known","the","truth","I","would","have","acted","differently"]},
+ {q:"Build the sentence:",hint:"No solo redujo los costos, sino que también mejoró la calidad.",words:["costs","but","quality","Not","only","reduced","also","the","improved","she"],answer:["Not","only","did","she","reduce","costs","but","she","also","improved","quality"]},
+ {q:"Build the sentence:",hint:"Se cree que la empresa abrirá una nueva oficina.",words:["a","is","new","The","believed","open","to","company","office","be"],answer:["The","company","is","believed","to","open","a","new","office"]},
+ {q:"Build the sentence:",hint:"Cuanto más practiques, más confianza tendrás.",words:["the","more","confidence","The","you","more","practise","you'll","have"],answer:["The","more","you","practise","the","more","confidence","you'll","have"]}
+);
+bank.B1.spell.push(
+ {q:"Which word is spelled correctly?",hint:"⚖️ A disadvantage or negative aspect",opts:["Drawback","Drawbak","Drawbeak","Drowback"],a:0},
+ {q:"Which word is spelled correctly?",hint:"🌱 Able to continue over time",opts:["Sustanable","Sustainable","Sustaineble","Sustainible"],a:1},
+ {q:"Which word is spelled correctly?",hint:"📢 Knowledge or understanding of an issue",opts:["Awareness","Awereness","Awarness","Awaremess"],a:0},
+ {q:"Which word is spelled correctly?",hint:"🌊 Extremely difficult to manage",opts:["Overwelming","Overwhelming","Overwhelmng","Overwhemling"],a:1},
+ {q:"Which word is spelled correctly?",hint:"🗣️ To convince someone",opts:["Persuade","Persuadee","Perswade","Persuede"],a:0}
+);
+
 const titles={vocab:"🧠 Word Explorer",grammar:"✏️ Grammar Quest",builder:"🧩 Sentence Builder",spell:"🔤 Spell It!"};
 let level="A1",game="",questions=[],index=0,score=0,selected=null,locked=false,chosenWords=[],lang="en";
 let total=Number(localStorage.getItem("eq_total")||0),best=Number(localStorage.getItem("eq_best")||0);
