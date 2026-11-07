@@ -81,17 +81,67 @@ footer{text-align:center;color:#918891;font-size:12px;margin:30px 0 0}
 .hidden{display:none!important}
 @media(max-width:850px){.games{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:560px){.app{padding:15px 13px 35px}.hero{grid-template-columns:1fr;padding:23px}.hero-art{font-size:70px;grid-row:1}.hero h2{font-size:31px}.games{grid-template-columns:1fr 1fr;gap:10px}.game-card{padding:14px;min-height:180px}.topstats{gap:5px}.pill{font-size:11px;padding:8px 10px}.brand h1{font-size:16px}.panel{padding:17px}.choices{grid-template-columns:1fr}.section-title span{display:none}}
+
+/* English with Yeinely brand styling */
+:root{--pink:#f8d3e8;--pink2:#ed83bd;--sage:#dceefa;--blue:#cfe6ff;--yellow:#fff0bd;--cream:#fff8fc;--ink:#073a83;--muted:#667b9d;--white:#fff;--line:#e7eaf4;--green:#39845a;--red:#b94d65;--shadow:0 14px 38px rgba(32,67,125,.11);--radius:24px}
+body{background:linear-gradient(135deg,#fff8fc 0%,#fff2f9 55%,#f0f7ff 100%);color:var(--ink)}
+.app{max-width:1240px;padding:24px 28px 48px}
+header{padding:8px 0 18px;border-bottom:1px solid #f2dce9;margin-bottom:30px}
+.brand{gap:13px}.logo{width:58px;height:58px;border-radius:50%;background:linear-gradient(145deg,#fff,#f8d3e8);border:2px solid #f1a9d0;color:#064b9b;text-decoration:none;font-size:40px;font-weight:900;box-shadow:0 7px 20px rgba(214,89,155,.13)}
+.brand h1{font-size:22px;color:#073a83}.brand h1 span{display:block;color:#e34898}.brand small{color:#7d7590;letter-spacing:2px}
+.site-link{color:#064b9b;text-decoration:none;font-weight:900;font-size:13px;border:1px solid #e8dce9;background:#fff;border-radius:999px;padding:10px 16px}
+.topstats .pill{color:#073a83;border-color:#e7eaf4;box-shadow:0 5px 16px rgba(32,67,125,.06)}
+.hero{position:relative;background:radial-gradient(ellipse at 75% 50%,#f6c4e1 0%,transparent 45%),linear-gradient(115deg,#fff0f8 0%,#fce4f1 52%,#eaf5ff 100%);border:1px solid #f4d9e9;border-radius:32px;padding:38px 42px;grid-template-columns:1.15fr .85fr;min-height:310px;box-shadow:var(--shadow)}
+.hero:after{content:"♡";position:absolute;right:39%;top:15px;color:#e34898;font-size:54px;transform:rotate(13deg);opacity:.8}
+.eyebrow{color:#bd548f;letter-spacing:2.2px}
+.hero h2{font-size:clamp(36px,4.5vw,58px);color:#073a83;letter-spacing:-1.8px;line-height:1.02;margin:14px 0}
+.hero h2 span{color:#e34898}
+.hero p{font-size:16px;color:#365b91;max-width:520px}
+.hero-tags{display:flex;gap:9px;flex-wrap:wrap;margin-top:20px}
+.hero-tags span{background:rgba(255,255,255,.76);border:1px solid #f0c8df;border-radius:999px;padding:8px 12px;color:#164987;font-size:12px;font-weight:900}
+.quest-preview{position:relative;justify-self:center;width:min(100%,370px);padding:25px 25px 22px;border:2px solid #d5e7fb;border-radius:27px;background:rgba(255,255,255,.91);box-shadow:0 18px 38px rgba(48,104,166,.16);text-align:center;transform:rotate(-2deg)}
+.preview-spark{position:absolute;right:22px;top:10px;color:#f4bb24;font-size:30px}
+.preview-kicker{font-size:9px;letter-spacing:2px;font-weight:900;color:#d15b9b}
+.preview-title{font-size:28px;font-weight:1000;letter-spacing:1px;margin-top:10px;color:#073a83}
+.quest-preview p{font-weight:800;color:#073a83;margin:4px 0 17px}
+.preview-levels{display:flex;gap:10px}.preview-levels span{flex:1;padding:17px 8px;border-radius:17px;background:#d7eaff;font-size:25px;font-weight:1000;color:#073a83}.preview-levels span:nth-child(2){background:#f9d3e9}
+.preview-footer{margin-top:18px;font-weight:900;color:#164987}
+.controls{margin:28px 0 18px}
+.levels{border:1px solid #f0d8e8;background:#fff;padding:5px;box-shadow:0 5px 16px rgba(32,67,125,.05)}
+.level-btn{color:#42628d}.level-btn.active{background:#064b9b;color:#fff;box-shadow:0 5px 13px rgba(6,75,155,.2)}
+.lang-btn{color:#064b9b;border-color:#d7e5f6;background:#fff}
+.section-title h3{color:#073a83;font-size:23px}.section-title span{color:#8b6b83}
+.game-card{border:1px solid #e7eaf4;border-radius:24px;box-shadow:0 8px 24px rgba(32,67,125,.07);padding:20px;color:#073a83}
+.game-card:hover{border-color:#efb6d7;box-shadow:0 15px 30px rgba(32,67,125,.12)}
+.game-card h4{color:#073a83;font-size:17px}.game-card p{color:#667b9d}
+.game-icon{border-radius:18px!important}
+.card-bottom{color:#bd548f}.tag{background:#fff0f8;color:#b84789}
+.panel{border-color:#e8e8f3;box-shadow:var(--shadow)}
+.panel-head h3{color:#073a83}
+.back,.secondary{color:#064b9b;border-color:#dce6f4}
+.primary{background:#064b9b;box-shadow:0 7px 18px rgba(6,75,155,.18)}
+.primary:hover{background:#073a83}
+.progress-fill{background:linear-gradient(90deg,#e34898,#4aa6e8)}
+.choice{color:#073a83;border-color:#e5e8f1}.choice:hover,.choice.selected{border-color:#ed83bd;background:#fff2f9}
+.choice.correct{border-color:#8db99a;background:#f0f8f1;color:#356a49}
+.choice.wrong{border-color:#d58b91;background:#fff3f3;color:#a34752}
+.word{color:#073a83;background:#fff0f8;border-color:#f0cfe1}
+.answer-line .word{background:#dceefa}
+.result-stats span{background:#fff0f8;color:#073a83}
+footer{color:#8b7890}
+@media(max-width:700px){.app{padding:15px 14px 35px}header{flex-wrap:wrap}.brand h1{font-size:18px}.site-link{font-size:11px;padding:8px 11px}.hero{padding:25px 21px;gap:18px}.hero:after{right:12%;top:4px}.quest-preview{width:min(100%,340px)}.hero-tags span{font-size:11px}}
+
 </style>
 </head>
 <body>
 <div class="app">
 <header>
- <div class="brand"><div class="logo">🌸</div><div><h1>English with Yeinely</h1><small>LEARN · PRACTICE · GROW</small></div></div>
+ <div class="brand"><a class="logo" href="https://english-with-yeinely.englishwithyeinely.workers.dev/" aria-label="English with Yeinely home">♡</a><div><h1>English <span>with Yeinely</span></h1><small>LEARN · PRACTICE · GROW</small></div></div><a class="site-link" href="https://english-with-yeinely.englishwithyeinely.workers.dev/">← Main website</a>
  <div class="topstats"><div class="pill">⭐ <span id="totalPoints">0</span> points</div><div class="pill">🏆 <span id="bestScore">0</span> best</div></div>
 </header>
 <section class="hero">
- <div><div class="eyebrow">Your little English adventure</div><h2>Welcome to<br>English Quest!</h2><p>Learn a little, practice a lot, and celebrate every step. Choose a mini-game and let’s play!</p></div>
- <div class="hero-art" aria-hidden="true">📚✨</div>
+ <div class="hero-copy"><div class="eyebrow">YOUR ENGLISH ADVENTURE STARTS HERE</div><h2>Small steps make<br><span>great progress.</span></h2><p>Welcome to English Quest, your interactive practice space. Learn, play, and build confidence one little step at a time!</p><div class="hero-tags"><span>✓ Grammar & Vocabulary</span><span>✓ Reading & Listening</span><span>✓ Fun games & activities</span></div></div>
+ <div class="quest-preview" aria-label="English Quest learning levels"><div class="preview-spark">✦</div><div class="preview-kicker">YOUR LEARNING ADVENTURE</div><div class="preview-title">ENGLISH QUEST</div><p>Choose your level</p><div class="preview-levels"><span>A1</span><span>A2</span><span>B1</span></div><div class="preview-footer">🏆 Every small step counts!</div></div>
 </section>
 <div class="controls">
  <div class="levels" aria-label="Choose level"><button class="level-btn active" data-level="A1">A1 Beginner</button><button class="level-btn" data-level="A2">A2 Elementary</button></div>
