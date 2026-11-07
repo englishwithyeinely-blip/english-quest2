@@ -169,6 +169,7 @@ footer{color:#8b7890}
 <section class="panel" id="notebookPanel"><div class="panel-head"><h3>📚 My Vocabulary Notebook</h3><button class="back" id="notebookBack">← Back to games</button></div><p>Save unfamiliar words and practise them until you feel confident.</p><div class="notebook-tools"><input id="newWord" placeholder="English word or phrase"><input id="newMeaning" placeholder="Meaning in Spanish"><button class="primary" id="addWord">＋ Add word</button></div><div class="notebook-tools"><button class="secondary" id="showAllWords">All words</button><button class="secondary" id="showDifficultWords">Still learning</button><button class="secondary" id="startFlashcards">▶ Practise flashcards</button></div><div id="notebookStats" class="section-title"></div><div id="flashcardArea" class="hidden"></div><div id="notebookWords" class="notebook-grid"></div></section>
 
 <div class="lesson-launch"><div><h3>🌱 Start learning · Pre-A1 Unit 1</h3><p>The Alphabet & Spelling · Read, listen, practise pronunciation, and record yourself.</p></div><button class="lesson-btn" id="openAlphabetLesson">Open Unit 1 →</button></div>
+<div class="lesson-launch" id="numbersLaunch"><div><h3>🔢 Pre-A1 Unit 2 · Numbers</h3><p>Learn numbers 0–100, phone numbers, and everyday uses of numbers.</p></div><button class="lesson-btn" id="openNumbersLesson">Open Unit 2 →</button></div>
 <div id="home">
  <div class="section-title"><h3 id="gamesTitle">Choose your mini-game</h3><span id="levelLabel">A1 · Beginner</span></div>
  <div class="games">
@@ -192,6 +193,18 @@ footer{color:#8b7890}
  </div>
 </section>
 
+
+<section class="panel" id="numbersPanel">
+<div class="panel-head"><h3>🔢 Pre-A1 · Unit 2: Numbers</h3><button class="back" id="numbersBack">← Back to learning</button></div>
+<p id="numbersIntro">Learn to recognize, say, read, and write numbers from 0 to 100.</p>
+<div class="lesson-grid">
+<article class="lesson-card"><h4>1. Numbers · 0–20</h4><p>Tap each number to hear it in American English.</p><div class="alphabet-grid" id="numberGrid"></div></article>
+<article class="lesson-card"><h4>2. Tens · 20–100</h4><p>Listen and repeat. Notice the difference between thirteen and thirty.</p><div class="alphabet-grid" id="tensGrid"></div><button class="listen-btn" id="listenTens">▶ Listen to all the tens</button></article>
+<article class="lesson-card"><h4>3. Reading · At a café</h4><div class="lesson-reading">Server: How many coffees would you like?<br>Customer: Two, please.<br>Server: Anything else?<br>Customer: Yes, three bottles of water.<br>Server: That's twelve dollars and fifty cents.<br>Customer: Here you are.</div><p id="numbersQuestion">Check understanding: How many bottles of water does the customer want?</p><button class="listen-btn" id="numbersReadAnswer">Show answer</button><div class="lesson-status" id="numbersReadingStatus"></div></article>
+<article class="lesson-card"><h4>4. Listening · Number dictation</h4><p>Listen to the number. Type it using digits.</p><button class="listen-btn" id="playDictation">🔊 Listen to the number</button><input class="lesson-input" id="numberInput" placeholder="Type the number you hear"><button class="lesson-btn" id="checkNumber">Check answer</button><div class="lesson-status" id="numberStatus"></div></article>
+<article class="lesson-card"><h4>5. Speaking · Phone numbers</h4><p>Listen to the model. Then say your own phone number aloud, one digit at a time.</p><p><strong>Model:</strong> My phone number is 482-7319.</p><button class="listen-btn" id="playPhoneModel">▶ Listen to the model</button><button class="listen-btn" id="playPhoneDigits">▶ Listen digit by digit</button></article>
+<article class="lesson-card"><h4>6. Writing · Numbers in words</h4><p>Listen, then write the number using English words.</p><button class="listen-btn" id="playWordNumber">🔊 Listen to the number</button><input class="lesson-input" id="wordNumberInput" placeholder="Write the number in words"><button class="lesson-btn" id="checkWordNumber">Check spelling</button><div class="lesson-status" id="wordNumberStatus"></div></article>
+</div></section>
 <section class="panel" id="gamePanel">
  <div class="panel-head"><h3 id="gameTitle">Mini-game</h3><button class="back" id="backBtn">← <span id="backText">All games</span></button></div>
  <div id="playArea">
@@ -540,7 +553,7 @@ function applyLearningLanguage(){
   else el.textContent=spanish?es:en;
  });
 }
-$("langToggle").addEventListener("click",()=>{lang=lang==="en"?"es":"en";applyLearningLanguage()});
+$("langToggle").addEventListener("click",()=>{lang=lang==="en"?"es":"en";applyLearningLanguage();applyNumbersLanguage()});
 
 function startGame(type){game=type;questions=[...bank[level][type]].sort(()=>Math.random()-.5).slice(0,5);index=0;score=0;$("home").classList.add("hidden");$("gamePanel").classList.add("show");$("playArea").classList.remove("hidden");$("resultArea").classList.add("hidden");$("gameTitle").textContent=(level==="PREA1"?"🌱 Starter · ":"")+titles[type];render()}
 function render(){selected=null;locked=false;chosenWords=[];$("saveWordBtn").classList.toggle("hidden",game!=="vocab");$("feedback").textContent="";$("feedback").className="feedback";$("checkBtn").disabled=true;$("checkBtn").classList.remove("hidden");$("nextBtn").classList.add("hidden");$("questionCount").textContent=`Question ${index+1} of ${questions.length}`;$("roundScore").textContent="⭐ "+score;$("progressFill").style.width=(index/questions.length*100)+"%";
@@ -586,6 +599,55 @@ document.querySelectorAll(".review-letter").forEach(b=>b.addEventListener("click
 $("startRecording").addEventListener("click",async()=>{if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia||typeof MediaRecorder==="undefined"){$("recordStatus").textContent="Recording is not supported here. Try a recent browser on HTTPS.";return}try{let stream=await navigator.mediaDevices.getUserMedia({audio:true});studentChunks=[];studentRecorder=new MediaRecorder(stream);studentRecorder.ondataavailable=e=>{if(e.data.size)studentChunks.push(e.data)};studentRecorder.onstop=()=>{let blob=new Blob(studentChunks,{type:studentRecorder.mimeType||"audio/webm"});if(studentRecordingUrl)URL.revokeObjectURL(studentRecordingUrl);studentRecordingUrl=URL.createObjectURL(blob);$("studentAudio").src=studentRecordingUrl;$("studentAudio").classList.remove("hidden");$("playRecording").disabled=false;stream.getTracks().forEach(t=>t.stop());$("recordStatus").textContent="Recording ready. Listen to yourself and try again!"};studentRecorder.start();$("startRecording").disabled=true;$("stopRecording").disabled=false;$("recordStatus").textContent="Recording… Say the letters in your name."}catch(e){$("recordStatus").textContent="Microphone permission was not granted or is unavailable."}});
 $("stopRecording").addEventListener("click",()=>{if(studentRecorder&&studentRecorder.state!=="inactive"){studentRecorder.stop();$("startRecording").disabled=false;$("stopRecording").disabled=true}});
 $("playRecording").addEventListener("click",()=>{$("studentAudio").play()});
+
+const numberWords=["zero","one","two","three","four","five","six","seven","eight","nine","ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen","twenty"];
+const tensWords=[["20","twenty"],["30","thirty"],["40","forty"],["50","fifty"],["60","sixty"],["70","seventy"],["80","eighty"],["90","ninety"],["100","one hundred"]];
+function buildNumberTiles(){const g=$("numberGrid"),t=$("tensGrid");numberWords.forEach((w,i)=>{const b=document.createElement("button");b.className="letter-tile";b.innerHTML=i+"<small>"+w+"</small>";b.onclick=()=>speakLesson(w);g.appendChild(b)});tensWords.forEach(([n,w])=>{const b=document.createElement("button");b.className="letter-tile";b.innerHTML=n+"<small>"+w+"</small>";b.onclick=()=>speakLesson(w);t.appendChild(b)})}
+function openNumbers(){applyNumbersLanguage();$("home").classList.add("hidden");$("gamePanel").classList.remove("show");$("notebookPanel").classList.remove("show");$("lessonPanel").classList.remove("show");$("numbersPanel").classList.add("show");buildNumberTiles()}
+$("openNumbersLesson").addEventListener("click",openNumbers);
+$("numbersBack").addEventListener("click",()=>{$("numbersPanel").classList.remove("show");$("home").classList.remove("hidden")});
+$("listenTens").addEventListener("click",()=>speakLesson("Twenty, thirty, forty, fifty, sixty, seventy, eighty, ninety, one hundred."));
+$("numbersReadAnswer").addEventListener("click",()=>{$("numbersReadingStatus").textContent=lang==="es"?"Quiere tres botellas de agua.":"The customer wants three bottles of water."});
+$("playDictation").addEventListener("click",()=>speakLesson("Seventeen"));
+$("checkNumber").addEventListener("click",()=>{$("numberStatus").textContent=$("numberInput").value.trim()==="17"?(lang==="es"?"¡Correcto!":"Correct!"):(lang==="es"?"Inténtalo otra vez. La respuesta es 17.":"Try again. The answer is 17.")});
+$("playPhoneModel").addEventListener("click",()=>speakLesson("My phone number is four eight two, seven three one nine."));
+$("playPhoneDigits").addEventListener("click",()=>speakLesson("Four. Eight. Two. Seven. Three. One. Nine."));
+$("playWordNumber").addEventListener("click",()=>speakLesson("Forty-five"));
+$("checkWordNumber").addEventListener("click",()=>{$("wordNumberStatus").textContent=$("wordNumberInput").value.trim().toLowerCase().replace(/[- ]/g,"")==="fortyfive"?(lang==="es"?"¡Muy bien!":"Well done!"):(lang==="es"?"Inténtalo otra vez. La respuesta es forty-five.":"Try again. The answer is forty-five.")});
+
+function applyNumbersLanguage(){
+ const es=lang==="es";
+ const pairs=[
+ ["#numbersLaunch h3","🔢 Pre-A1 Unit 2 · Numbers","🔢 Pre-A1 Unidad 2 · Números"],
+ ["#numbersLaunch p","Learn numbers 0–100, phone numbers, and everyday uses of numbers.","Aprende los números del 0 al 100, los números de teléfono y sus usos cotidianos."],
+ ["#openNumbersLesson","Open Unit 2 →","Abrir Unidad 2 →"],
+ ["#numbersBack","← Back to learning","← Volver al aprendizaje"],
+ ["#numbersIntro","Learn to recognize, say, read, and write numbers from 0 to 100.","Aprende a reconocer, decir, leer y escribir los números del 0 al 100."],
+ ["#numbersPanel .lesson-card:nth-child(1) h4","1. Numbers · 0–20","1. Números · 0–20"],
+ ["#numbersPanel .lesson-card:nth-child(1) p","Tap each number to hear it in American English.","Pulsa cada número para escucharlo en inglés americano."],
+ ["#numbersPanel .lesson-card:nth-child(2) h4","2. Tens · 20–100","2. Decenas · 20–100"],
+ ["#numbersPanel .lesson-card:nth-child(2) p","Listen and repeat. Notice the difference between thirteen and thirty.","Escucha y repite. Observa la diferencia entre thirteen y thirty."],
+ ["#listenTens","▶ Listen to all the tens","▶ Escuchar todas las decenas"],
+ ["#numbersPanel .lesson-card:nth-child(3) h4","3. Reading · At a café","3. Lectura · En una cafetería"],
+ ["#numbersQuestion","Check understanding: How many bottles of water does the customer want?","Comprueba tu comprensión: ¿Cuántas botellas de agua quiere el cliente?"],
+ ["#numbersReadAnswer","Show answer","Mostrar respuesta"],
+ ["#numbersPanel .lesson-card:nth-child(4) h4","4. Listening · Number dictation","4. Comprensión auditiva · Dictado de números"],
+ ["#numbersPanel .lesson-card:nth-child(4) p","Listen to the number. Type it using digits.","Escucha el número. Escríbelo usando cifras."],
+ ["#playDictation","🔊 Listen to the number","🔊 Escuchar el número"],
+ ["#numberInput","Type the number you hear","Escribe el número que escuchas"],
+ ["#checkNumber","Check answer","Comprobar respuesta"],
+ ["#numbersPanel .lesson-card:nth-child(5) h4","5. Speaking · Phone numbers","5. Expresión oral · Números de teléfono"],
+ ["#numbersPanel .lesson-card:nth-child(5) p","Listen to the model. Then say your own phone number aloud, one digit at a time.","Escucha el ejemplo. Después di tu propio número de teléfono en voz alta, cifra por cifra."],
+ ["#playPhoneModel","▶ Listen to the model","▶ Escuchar el ejemplo"],
+ ["#playPhoneDigits","▶ Listen digit by digit","▶ Escuchar cifra por cifra"],
+ ["#numbersPanel .lesson-card:nth-child(6) h4","6. Writing · Numbers in words","6. Escritura · Números con palabras"],
+ ["#numbersPanel .lesson-card:nth-child(6) p","Listen, then write the number using English words.","Escucha y escribe el número con palabras en inglés."],
+ ["#playWordNumber","🔊 Listen to the number","🔊 Escuchar el número"],
+ ["#wordNumberInput","Write the number in words","Escribe el número con palabras"],
+ ["#checkWordNumber","Check spelling","Comprobar escritura"]
+ ];
+ pairs.forEach(([id,en,esText])=>{const el=$(id.slice(1));if(!el)return;if(id.includes("Input"))el.placeholder=es?esText:en;else el.textContent=es?esText:en});
+}
 
 function goHome(){$("notebookPanel").classList.remove("show");$("gamePanel").classList.remove("show");$("home").classList.remove("hidden");$("playArea").classList.remove("hidden");$("resultArea").classList.add("hidden");game=""}
 </script>
