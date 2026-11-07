@@ -494,19 +494,51 @@ document.querySelectorAll(".game-card").forEach(b=>b.addEventListener("click",()
 $("notebookBtn").addEventListener("click",openNotebook);$("notebookBack").addEventListener("click",goHome);$("addWord").addEventListener("click",addCustomWord);$("showAllWords").addEventListener("click",()=>{notebookFilter="all";renderNotebook()});$("showDifficultWords").addEventListener("click",()=>{notebookFilter="difficult";renderNotebook()});$("startFlashcards").addEventListener("click",startFlashcards);$("saveWordBtn").addEventListener("click",()=>saveCurrentWord(false));
 $("backBtn").addEventListener("click",goHome);$("checkBtn").addEventListener("click",check);$("nextBtn").addEventListener("click",next);
 function applyLearningLanguage(){
- const isStarter=level==="PREA1",isA1=level==="A1";
- const showSpanish=lang==="es"&&(isStarter||isA1);
- $("gamesTitle").textContent=showSpanish?"Elige tu minijuego":"Choose your mini-game";
- $("backText").textContent=showSpanish?"Todos los juegos":"All games";
- $("langToggle").textContent=lang==="en"?"ES / EN":"EN / ES";
- const note=$("levelLanguageNote");
- if(note){
-  note.textContent=isStarter?(lang==="es"?"Instrucciones en español con ejemplos sencillos en inglés.":"Spanish support with simple English examples."):
-   isA1?(lang==="es"?"La práctica será principalmente en inglés, con pequeñas ayudas en español.":"Practice is mainly in English, with occasional Spanish support."):
-   (level==="A2"?"Practice and instructions are in English. Spanish support is gradually reduced.":"English-only instructions and practice. Keep building confidence in English.");
- }
- const intro=$("alphabetIntro");
- if(intro) intro.innerHTML=isStarter?(lang==="es"?"Aprende los nombres de las 26 letras en inglés americano. Escucha, repite, lee y practica cómo deletrear.":"Learn the 26 letter names in American English. Listen, repeat, read, and practise spelling."):"Learn the 26 letter names in American English. Listen, repeat, read, and practise spelling.";
+ const spanish=lang==="es";
+ const set=(selector,en,es)=>{const el=document.querySelector(selector);if(el)el.textContent=spanish?es:en};
+ $("langToggle").textContent=spanish?"EN / ES":"ES / EN";
+ set("#gamesTitle","Choose your mini-game","Elige tu minijuego");
+ set("#backText","All games","Todos los juegos");
+ set("#alphabetIntro","Learn the 26 letter names in American English. Listen, repeat, read, and practise spelling.","Aprende los nombres de las 26 letras en inglés americano. Escucha, repite, lee y practica cómo deletrear.");
+ set("#levelLanguageNote","Instructions are shown in English. Switch to ES to see them in Spanish.","Las instrucciones se muestran en español. Cambia a EN para verlas en inglés.");
+ const lessonTexts=[
+  [".lesson-launch h3","🌱 Start learning · Pre-A1 Unit 1","🌱 Comienza a aprender · Pre-A1 Unidad 1"],
+  [".lesson-launch p","The Alphabet & Spelling · Read, listen, practise pronunciation, and record yourself.","El alfabeto y deletreo · Lee, escucha, practica la pronunciación y grábate."],
+  ["#openAlphabetLesson","Open Unit 1 →","Abrir Unidad 1 →"],
+  ["#lessonBack","← Back to learning","← Volver al aprendizaje"],
+  ["#lessonPanel .lesson-card:nth-child(1) h4","1. Alphabet · Listen to each letter","1. Alfabeto · Escucha cada letra"],
+  ["#lessonPanel .lesson-card:nth-child(1) p","Tap a letter to hear its name and an example word.","Pulsa una letra para escuchar su nombre y una palabra de ejemplo."],
+  ["#lessonPanel .lesson-card:nth-child(2) h4","2. Listen and repeat","2. Escucha y repite"],
+  ["#lessonPanel .lesson-card:nth-child(2) p","Listen to the alphabet in groups, then repeat aloud.","Escucha el alfabeto por grupos y después repítelo en voz alta."],
+  ["#playAlphabet","▶ Listen to A–Z","▶ Escuchar de la A a la Z"],
+  ["#playVowels","▶ Listen to vowels","▶ Escuchar las vocales"],
+  ["#lessonPanel .lesson-card:nth-child(2) small","Audio uses your browser's built-in American English voice when available.","El audio utiliza la voz de inglés americano integrada en tu navegador, si está disponible."],
+  ["#lessonPanel .lesson-card:nth-child(3) h4","3. Reading · A spelling conversation","3. Lectura · Una conversación para deletrear"],
+  ["#lessonPanel .lesson-card:nth-child(3) strong","At a reception desk","En la recepción"],
+  ["#lessonPanel .lesson-card:nth-child(3) p strong","Check understanding:","Comprueba tu comprensión:"],
+  ["#lessonPanel .lesson-card:nth-child(3) p","Check understanding: How do you spell Morgan?","Comprueba tu comprensión: ¿Cómo se deletrea Morgan?"],
+  ["#readAnswer","Show answer","Mostrar respuesta"],
+  ["#lessonPanel .lesson-card:nth-child(4) h4","4. Speaking Studio · Record yourself","4. Práctica oral · Grábate"],
+  ["#lessonPanel .lesson-card:nth-child(4) p","Say the letters in your name. Then listen to your recording and try again.","Di las letras de tu nombre. Después escucha tu grabación e inténtalo de nuevo."],
+  ["#playModel","▶ Listen to model","▶ Escuchar el ejemplo"],
+  ["#startRecording","🎙 Start recording","🎙 Comenzar grabación"],
+  ["#stopRecording","Stop","Detener"],
+  ["#playRecording","▶ Listen to my recording","▶ Escuchar mi grabación"],
+  ["#recordStatus","Allow microphone access when your browser asks.","Permite el acceso al micrófono cuando tu navegador lo solicite."],
+  ["#lessonPanel .lesson-card:nth-child(5) h4","5. Writing · Spell a word","5. Escritura · Deletrea una palabra"],
+  ["#lessonPanel .lesson-card:nth-child(5) p","Listen to the word, then type the correct spelling.","Escucha la palabra y escribe cómo se deletrea correctamente."],
+  ["#spellListen","🔊 Listen to the word","🔊 Escuchar la palabra"],
+  ["#checkSpelling","Check spelling","Comprobar escritura"],
+  ["#spellInput","Type the word you hear","Escribe la palabra que escuchas"],
+  ["#lessonPanel .lesson-card:nth-child(6) h4","6. Quick review","6. Repaso rápido"],
+  ["#lessonPanel .lesson-card:nth-child(6) p","Which letter comes after M?","¿Qué letra viene después de la M?"]
+ ];
+ lessonTexts.forEach(([selector,en,es])=>{
+  const el=document.querySelector(selector);
+  if(!el)return;
+  if(selector==="#spellInput")el.placeholder=spanish?es:en;
+  else el.textContent=spanish?es:en;
+ });
 }
 $("langToggle").addEventListener("click",()=>{lang=lang==="en"?"es":"en";applyLearningLanguage()});
 
