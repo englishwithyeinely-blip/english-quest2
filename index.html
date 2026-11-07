@@ -181,7 +181,7 @@ footer{color:#8b7890}
 
 <section class="panel" id="lessonPanel">
  <div class="panel-head"><h3>🔤 Pre-A1 · Unit 1: The Alphabet & Spelling</h3><button class="back" id="lessonBack">← Back to learning</button></div>
- <p>Learn the 26 letter names in American English. Listen, repeat, read, and practise spelling. <strong>Aprende los nombres de las letras y practica cómo deletrear.</strong></p>
+ <p id="alphabetIntro">Learn the 26 letter names in American English. Listen, repeat, read, and practise spelling.</p><p id="levelLanguageNote" class="lesson-status">Spanish support with simple English examples.</p>
  <div class="lesson-grid">
   <article class="lesson-card"><h4>1. Alphabet · Listen to each letter</h4><p>Tap a letter to hear its name and an example word.</p><div class="alphabet-grid" id="alphabetGrid"></div></article>
   <article class="lesson-card"><h4>2. Listen and repeat</h4><p>Listen to the alphabet in groups, then repeat aloud.</p><button class="listen-btn" id="playAlphabet">▶ Listen to A–Z</button><button class="listen-btn" id="playVowels">▶ Listen to vowels</button><div class="lesson-status" id="audioStatus" aria-live="polite"></div><p><small>Audio uses your browser's built-in American English voice when available.</small></p></article>
@@ -489,11 +489,27 @@ let notebook=JSON.parse(localStorage.getItem("eq_notebook")||"[]"),flashIndex=0,
 const $=id=>document.getElementById(id);
 function stats(){$("totalPoints").textContent=total;$("bestScore").textContent=best}
 stats();
-document.querySelectorAll(".level-btn").forEach(b=>b.addEventListener("click",()=>{level=b.dataset.level;document.querySelectorAll(".level-btn").forEach(x=>x.classList.toggle("active",x===b));$("levelLabel").textContent=level==="PREA1"?"Pre-A1 · Starter":level+(level==="A1"?" · Beginner":level==="A2"?" · Elementary":" · Intermediate")}));
+document.querySelectorAll(".level-btn").forEach(b=>b.addEventListener("click",()=>{level=b.dataset.level;document.querySelectorAll(".level-btn").forEach(x=>x.classList.toggle("active",x===b));$("levelLabel").textContent=level==="PREA1"?"Pre-A1 · Starter":level+(level==="A1"?" · Beginner":level==="A2"?" · Elementary":" · Intermediate");applyLearningLanguage()}));
 document.querySelectorAll(".game-card").forEach(b=>b.addEventListener("click",()=>startGame(b.dataset.game)));
 $("notebookBtn").addEventListener("click",openNotebook);$("notebookBack").addEventListener("click",goHome);$("addWord").addEventListener("click",addCustomWord);$("showAllWords").addEventListener("click",()=>{notebookFilter="all";renderNotebook()});$("showDifficultWords").addEventListener("click",()=>{notebookFilter="difficult";renderNotebook()});$("startFlashcards").addEventListener("click",startFlashcards);$("saveWordBtn").addEventListener("click",()=>saveCurrentWord(false));
 $("backBtn").addEventListener("click",goHome);$("checkBtn").addEventListener("click",check);$("nextBtn").addEventListener("click",next);
-$("langToggle").addEventListener("click",()=>{lang=lang==="en"?"es":"en";$("gamesTitle").textContent=lang==="en"?"Choose your mini-game":"Elige tu minijuego";$("backText").textContent=lang==="en"?"All games":"Todos los juegos";$("langToggle").textContent=lang==="en"?"ES / EN":"EN / ES"});
+function applyLearningLanguage(){
+ const isStarter=level==="PREA1",isA1=level==="A1";
+ const showSpanish=lang==="es"&&(isStarter||isA1);
+ $("gamesTitle").textContent=showSpanish?"Elige tu minijuego":"Choose your mini-game";
+ $("backText").textContent=showSpanish?"Todos los juegos":"All games";
+ $("langToggle").textContent=lang==="en"?"ES / EN":"EN / ES";
+ const note=$("levelLanguageNote");
+ if(note){
+  note.textContent=isStarter?(lang==="es"?"Instrucciones en español con ejemplos sencillos en inglés.":"Spanish support with simple English examples."):
+   isA1?(lang==="es"?"La práctica será principalmente en inglés, con pequeñas ayudas en español.":"Practice is mainly in English, with occasional Spanish support."):
+   (level==="A2"?"Practice and instructions are in English. Spanish support is gradually reduced.":"English-only instructions and practice. Keep building confidence in English.");
+ }
+ const intro=$("alphabetIntro");
+ if(intro) intro.innerHTML=isStarter?(lang==="es"?"Aprende los nombres de las 26 letras en inglés americano. Escucha, repite, lee y practica cómo deletrear.":"Learn the 26 letter names in American English. Listen, repeat, read, and practise spelling."):"Learn the 26 letter names in American English. Listen, repeat, read, and practise spelling.";
+}
+$("langToggle").addEventListener("click",()=>{lang=lang==="en"?"es":"en";applyLearningLanguage()});
+
 function startGame(type){game=type;questions=[...bank[level][type]].sort(()=>Math.random()-.5).slice(0,5);index=0;score=0;$("home").classList.add("hidden");$("gamePanel").classList.add("show");$("playArea").classList.remove("hidden");$("resultArea").classList.add("hidden");$("gameTitle").textContent=(level==="PREA1"?"🌱 Starter · ":"")+titles[type];render()}
 function render(){selected=null;locked=false;chosenWords=[];$("saveWordBtn").classList.toggle("hidden",game!=="vocab");$("feedback").textContent="";$("feedback").className="feedback";$("checkBtn").disabled=true;$("checkBtn").classList.remove("hidden");$("nextBtn").classList.add("hidden");$("questionCount").textContent=`Question ${index+1} of ${questions.length}`;$("roundScore").textContent="⭐ "+score;$("progressFill").style.width=(index/questions.length*100)+"%";
 let q=questions[index];$("question").textContent=q.q;$("hint").textContent=q.hint||"";
@@ -525,7 +541,7 @@ let studentRecorder=null,studentChunks=[],studentRecordingUrl="";
 const alphabetExamples=[["A","apple"],["B","book"],["C","cat"],["D","door"],["E","egg"],["F","family"],["G","green"],["H","house"],["I","ice"],["J","job"],["K","key"],["L"," lemon"],["M","mother"],["N","name"],["O","orange"],["P","phone"],["Q","question"],["R","red"],["S","student"],["T","table"],["U","umbrella"],["V","village"],["W","water"],["X","box"],["Y","yellow"],["Z","zebra"]];
 function speakLesson(text){if(!("speechSynthesis" in window)){alert("Audio playback is not supported in this browser.");return}speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(text);u.lang="en-US";u.rate=.82;speechSynthesis.speak(u)}
 function buildAlphabet(){let g=$("alphabetGrid");if(!g)return;g.innerHTML="";alphabetExamples.forEach(([letter,word])=>{let b=document.createElement("button");b.className="letter-tile";b.innerHTML=letter+"<small>"+word+"</small>";b.setAttribute("aria-label","Listen to "+letter+" as in "+word);b.onclick=()=>speakLesson(letter+". "+word);g.appendChild(b)})}
-function openAlphabet(){ $("home").classList.add("hidden");$("gamePanel").classList.remove("show");$("notebookPanel").classList.remove("show");$("lessonPanel").classList.add("show");buildAlphabet()}
+function openAlphabet(){ applyLearningLanguage(); $("home").classList.add("hidden");$("gamePanel").classList.remove("show");$("notebookPanel").classList.remove("show");$("lessonPanel").classList.add("show");buildAlphabet()}
 $("openAlphabetLesson").addEventListener("click",openAlphabet);
 $("lessonBack").addEventListener("click",()=>{$("lessonPanel").classList.remove("show");$("home").classList.remove("hidden")});
 $("playAlphabet").addEventListener("click",()=>speakLesson("A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z."));
