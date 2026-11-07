@@ -142,10 +142,10 @@ footer{color:#8b7890}
 </header>
 <section class="hero">
  <div class="hero-copy"><div class="eyebrow">YOUR ENGLISH ADVENTURE STARTS HERE</div><h2>Small steps make<br><span>great progress.</span></h2><p>Welcome to English Quest, your interactive practice space. Learn, play, and build confidence one little step at a time!</p><div class="hero-tags"><span>✓ Grammar & Vocabulary</span><span>✓ Reading & Listening</span><span>✓ Fun games & activities</span></div></div>
- <div class="quest-preview" aria-label="English Quest learning levels"><div class="preview-spark">✦</div><div class="preview-kicker">YOUR LEARNING ADVENTURE</div><div class="preview-title">ENGLISH QUEST</div><p>Choose your level</p><div class="preview-levels"><span>A1</span><span>A2</span><span>B1</span></div><div class="preview-footer">🏆 Every small step counts!</div></div>
+ <div class="quest-preview" aria-label="English Quest learning levels"><div class="preview-spark">✦</div><div class="preview-kicker">YOUR LEARNING ADVENTURE</div><div class="preview-title">ENGLISH QUEST</div><p>Choose your level</p><div class="preview-levels"><span>Pre-A1</span><span>A1</span><span>A2</span><span>B1</span></div><div class="preview-footer">🏆 Every small step counts!</div></div>
 </section>
 <div class="controls">
- <div class="levels" aria-label="Choose level"><button class="level-btn active" data-level="A1">A1 Beginner</button><button class="level-btn" data-level="A2">A2 Elementary</button><button class="level-btn" data-level="B1">B1 Intermediate</button></div>
+ <div class="levels" aria-label="Choose level"><button class="level-btn" data-level="PREA1">Pre-A1 Starter</button><button class="level-btn active" data-level="A1">A1 Beginner</button><button class="level-btn" data-level="A2">A2 Elementary</button><button class="level-btn" data-level="B1">B1 Intermediate</button></div>
  <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="notebook-btn" id="notebookBtn">📚 My Vocabulary Notebook</button><button class="lang-btn" id="langToggle">ES / EN</button></div>
 </div>
 <section class="panel" id="notebookPanel"><div class="panel-head"><h3>📚 My Vocabulary Notebook</h3><button class="back" id="notebookBack">← Back to games</button></div><p>Save unfamiliar words and practise them until you feel confident.</p><div class="notebook-tools"><input id="newWord" placeholder="English word or phrase"><input id="newMeaning" placeholder="Meaning in Spanish"><button class="primary" id="addWord">＋ Add word</button></div><div class="notebook-tools"><button class="secondary" id="showAllWords">All words</button><button class="secondary" id="showDifficultWords">Still learning</button><button class="secondary" id="startFlashcards">▶ Practise flashcards</button></div><div id="notebookStats" class="section-title"></div><div id="flashcardArea" class="hidden"></div><div id="notebookWords" class="notebook-grid"></div></section>
@@ -174,6 +174,44 @@ footer{color:#8b7890}
 </div>
 <script>
 const bank={
+ PREA1:{
+ vocab:[
+  {q:"What does “hello” mean?",hint:"👋 A greeting",opts:["Adiós","Hola","Gracias","Por favor"],a:1},
+  {q:"What does “one” mean?",hint:"🔢 Number 1",opts:["Uno","Dos","Tres","Diez"],a:0},
+  {q:"Choose the meaning of “mother”.",hint:"👩 Family",opts:["Padre","Hermana","Madre","Abuela"],a:2},
+  {q:"What is “red” in Spanish?",hint:"🔴 A color",opts:["Azul","Rojo","Verde","Amarillo"],a:1},
+  {q:"What does “book” mean?",hint:"📘 Classroom object",opts:["Libro","Lápiz","Mesa","Puerta"],a:0},
+  {q:"What is “dog” in Spanish?",hint:"🐶 An animal",opts:["Gato","Pájaro","Perro","Pez"],a:2},
+  {q:"Choose the meaning of “Monday”.",hint:"📅 A day of the week",opts:["Domingo","Lunes","Viernes","Sábado"],a:1},
+  {q:"What does “water” mean?",hint:"💧 A drink",opts:["Leche","Agua","Jugo","Café"],a:1},
+  {q:"What is “happy” in Spanish?",hint:"😊 An emotion",opts:["Feliz","Triste","Enojado","Cansado"],a:0},
+  {q:"Choose the meaning of “family”.",hint:"👨‍👩‍👧 People related to you",opts:["Escuela","Familia","Amigos","Clase"],a:1}
+ ],
+ grammar:[
+  {q:"I ___ Yeinely.",hint:"Verb to be · I",opts:["am","is","are","be"],a:0},
+  {q:"You ___ a student.",hint:"Verb to be · You",opts:["am","is","are","be"],a:2},
+  {q:"She ___ my mother.",hint:"Verb to be · She",opts:["am","are","is","be"],a:2},
+  {q:"It ___ a cat.",hint:"Verb to be · It",opts:["am","is","are","be"],a:1},
+  {q:"This is ___ apple.",hint:"Articles · A / An",opts:["a","an","the","are"],a:1},
+  {q:"I have two ___.",hint:"Plural nouns",opts:["book","books","bookes","booking"],a:1},
+  {q:"___ name is Ana.",hint:"Possessive adjectives",opts:["My","I","Me","Mine"],a:0},
+  {q:"He ___ a brother.",hint:"Have / Has",opts:["have","haves","has","having"],a:2}
+ ],
+ builder:[
+  {q:"Build the sentence:",hint:"Hola, soy Ana.",words:["Ana","am","Hello","I"],answer:["Hello","I","am","Ana"]},
+  {q:"Build the sentence:",hint:"Esto es un libro.",words:["a","is","This","book"],answer:["This","is","a","book"]},
+  {q:"Build the sentence:",hint:"Ella es mi hermana.",words:["sister","my","is","She"],answer:["She","is","my","sister"]},
+  {q:"Build the sentence:",hint:"Tengo un perro.",words:["a","have","dog","I"],answer:["I","have","a","dog"]},
+  {q:"Build the sentence:",hint:"Es azul.",words:["blue","It","is"],answer:["It","is","blue"]}
+ ],
+ spell:[
+  {q:"Which word is spelled correctly?",hint:"👋 A greeting",opts:["Helo","Hello","Hallo","Hellow"],a:1},
+  {q:"Which word is spelled correctly?",hint:"🔤 The first letter of the alphabet",opts:["A","Ay","Ah","E"],a:0},
+  {q:"Which word is spelled correctly?",hint:"🐱 A common pet",opts:["Kat","Cat","Catt","Cet"],a:1},
+  {q:"Which word is spelled correctly?",hint:"🏠 A place where you live",opts:["Hous","House","Howse","Hause"],a:1},
+  {q:"Which word is spelled correctly?",hint:"💙 A color",opts:["Bleu","Blu","Blue","Bloo"],a:2}
+ ]},
+
  A1:{
  vocab:[
   {q:"What does “apple” mean?",hint:"🍎",opts:["Manzana","Casa","Perro","Libro"],a:0},
@@ -274,12 +312,12 @@ let notebook=JSON.parse(localStorage.getItem("eq_notebook")||"[]"),flashIndex=0,
 const $=id=>document.getElementById(id);
 function stats(){$("totalPoints").textContent=total;$("bestScore").textContent=best}
 stats();
-document.querySelectorAll(".level-btn").forEach(b=>b.addEventListener("click",()=>{level=b.dataset.level;document.querySelectorAll(".level-btn").forEach(x=>x.classList.toggle("active",x===b));$("levelLabel").textContent=level+(level==="A1"?" · Beginner":level==="A2"?" · Elementary":" · Intermediate")}));
+document.querySelectorAll(".level-btn").forEach(b=>b.addEventListener("click",()=>{level=b.dataset.level;document.querySelectorAll(".level-btn").forEach(x=>x.classList.toggle("active",x===b));$("levelLabel").textContent=level==="PREA1"?"Pre-A1 · Starter":level+(level==="A1"?" · Beginner":level==="A2"?" · Elementary":" · Intermediate")}));
 document.querySelectorAll(".game-card").forEach(b=>b.addEventListener("click",()=>startGame(b.dataset.game)));
 $("notebookBtn").addEventListener("click",openNotebook);$("notebookBack").addEventListener("click",goHome);$("addWord").addEventListener("click",addCustomWord);$("showAllWords").addEventListener("click",()=>{notebookFilter="all";renderNotebook()});$("showDifficultWords").addEventListener("click",()=>{notebookFilter="difficult";renderNotebook()});$("startFlashcards").addEventListener("click",startFlashcards);$("saveWordBtn").addEventListener("click",()=>saveCurrentWord(false));
 $("backBtn").addEventListener("click",goHome);$("checkBtn").addEventListener("click",check);$("nextBtn").addEventListener("click",next);
 $("langToggle").addEventListener("click",()=>{lang=lang==="en"?"es":"en";$("gamesTitle").textContent=lang==="en"?"Choose your mini-game":"Elige tu minijuego";$("backText").textContent=lang==="en"?"All games":"Todos los juegos";$("langToggle").textContent=lang==="en"?"ES / EN":"EN / ES"});
-function startGame(type){game=type;questions=[...bank[level][type]].sort(()=>Math.random()-.5).slice(0,5);index=0;score=0;$("home").classList.add("hidden");$("gamePanel").classList.add("show");$("playArea").classList.remove("hidden");$("resultArea").classList.add("hidden");$("gameTitle").textContent=titles[type];render()}
+function startGame(type){game=type;questions=[...bank[level][type]].sort(()=>Math.random()-.5).slice(0,5);index=0;score=0;$("home").classList.add("hidden");$("gamePanel").classList.add("show");$("playArea").classList.remove("hidden");$("resultArea").classList.add("hidden");$("gameTitle").textContent=(level==="PREA1"?"🌱 Starter · ":"")+titles[type];render()}
 function render(){selected=null;locked=false;chosenWords=[];$("saveWordBtn").classList.toggle("hidden",game!=="vocab");$("feedback").textContent="";$("feedback").className="feedback";$("checkBtn").disabled=true;$("checkBtn").classList.remove("hidden");$("nextBtn").classList.add("hidden");$("questionCount").textContent=`Question ${index+1} of ${questions.length}`;$("roundScore").textContent="⭐ "+score;$("progressFill").style.width=(index/questions.length*100)+"%";
 let q=questions[index];$("question").textContent=q.q;$("hint").textContent=q.hint||"";
 let area=$("answerArea");area.innerHTML="";
@@ -295,7 +333,7 @@ $("roundScore").textContent="⭐ "+score;$("checkBtn").classList.add("hidden");$
 function next(){index++;if(index>=questions.length){finish();return}render()}
 function finish(){best=Math.max(best,score);localStorage.setItem("eq_best",best);stats();$("playArea").classList.add("hidden");let pct=Math.round(score/(questions.length*10)*100);$("resultArea").classList.remove("hidden");$("resultArea").innerHTML=`<div class="big">${pct>=80?"🏆":pct>=50?"🌟":"🌷"}</div><h3>${pct>=80?"Amazing work!":pct>=50?"Great effort!":"Keep practicing!"}</h3><p>You completed ${titles[game]} · ${level}</p><div class="result-stats"><span>⭐ ${score} / ${questions.length*10} points</span><span>🎯 ${pct}% correct</span></div><p>${pct>=80?"You are making wonderful progress.": "Every little step helps you grow. Try again to improve your score!"}</p><div class="action-row"><button class="primary" id="again">Play again</button><button class="secondary" id="gamesAgain">Choose another game</button></div>`;$("again").addEventListener("click",()=>startGame(game));$("gamesAgain").addEventListener("click",goHome)}
 
-function wordFromQuestion(q){let m=q.match(/[“"]([^”"]+)[”"]/);return m?m[1].trim():""}
+function wordFromQuestion(q){let m=q.match(/[“"]([^”"]+)[”"]/);if(m)return m[1].trim();let n=q.match(/meaning of ([^?]+)\?/i);return n?n[1].replace(/[“”"]/g,"").trim():""}
 function saveCurrentWord(automatic){let q=questions[index];if(!q||game!=="vocab")return;let word=wordFromQuestion(q.q);if(!word)return;let meaning=q.opts[q.a];if(!notebook.some(x=>x.word.toLowerCase()===word.toLowerCase())){notebook.unshift({word:word,meaning:meaning,level:level,learned:false,added:Date.now()});localStorage.setItem("eq_notebook",JSON.stringify(notebook));if(!automatic){$("feedback").textContent="Saved to your Vocabulary Notebook!";$("feedback").className="feedback good"}}else if(!automatic){$("feedback").textContent="This word is already saved."}}
 function openNotebook(){$("home").classList.add("hidden");$("gamePanel").classList.remove("show");$("notebookPanel").classList.add("show");renderNotebook()}
 function addCustomWord(){let word=$("newWord").value.trim(),meaning=$("newMeaning").value.trim();if(!word||!meaning){alert("Please enter both the word and its meaning.");return}if(notebook.some(x=>x.word.toLowerCase()===word.toLowerCase())){alert("This word is already saved.");return}notebook.unshift({word:word,meaning:meaning,level:level,learned:false,added:Date.now()});localStorage.setItem("eq_notebook",JSON.stringify(notebook));$("newWord").value="";$("newMeaning").value="";renderNotebook()}
