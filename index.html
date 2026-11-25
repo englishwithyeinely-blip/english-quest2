@@ -936,6 +936,7 @@ function eqQuestionEs(q,u){
  if(q.startsWith('Write the English word or phrase from this unit that matches: ')){const w=q.slice(67).replace(/\\.$/,'');return 'Escribe la palabra o expresión en inglés que corresponde a: '+((typeof EQ_WORD_ES!=='undefined'&&EQ_WORD_ES[w])||w)+'.';}
  if(q.startsWith('Write one complete sentence using ')){const m=q.match(/using [“\"](.+?)[”\"] in the context of (.+)\\.$/);if(m)return 'Escribe una oración completa usando «'+m[1]+'» sobre '+m[2]+'.';}
  if(q.startsWith('What is the main topic of the reading in ')){const m=q.match(/reading in [“\"](.+?)[”\"]\\?/);if(m)return '¿Cuál es el tema principal de la lectura «'+m[1]+'»?';}
+ const exact={
  'How many letters are in the English alphabet?':'¿Cuántas letras tiene el alfabeto inglés?',
  'Which group contains the five vowels?':'¿Qué grupo contiene las cinco vocales?',
  'Which letter comes after B?':'¿Qué letra viene después de la B?',
@@ -983,7 +984,6 @@ function eqQuestionEs(q,u){
  'Which job helps sick people in a hospital?':'¿Qué profesión ayuda a las personas enfermas en un hospital?',
  'Which pronoun replaces “Carlos”?':'¿Qué pronombre sustituye a «Carlos»?',
  'What does “mother” mean?':'¿Qué significa «mother»?',
- const exact={
  'Which language focus belongs to this unit?':'¿Qué tema gramatical se practica en esta unidad?',
  'Who or what is the passage mainly about?':'¿De quién o de qué trata principalmente el texto?',
  'What important detail can you find?':'¿Qué detalle importante puedes encontrar?',
