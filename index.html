@@ -966,7 +966,7 @@ function eqQuestionEs(q,u){
  if(q.startsWith('How do you say '))return '¿Cómo se dice '+q.slice(15).replace('?','')+' en inglés?';
  return 'Traducción al español: '+q;
 }
-function eqQuestionMarkup(q,u){if(lang!=='es')return '<b>'+eqEsc(q)+'</b>';return '<b>'+eqEsc(eqQuestionEs(q,u))+'</b><span class="study-question-es">'+eqEsc(q)+'</span>;}
+function eqQuestionMarkup(q,u){if(lang!=='es')return '<b>'+eqEsc(q)+'</b>';return '<b>'+eqEsc(eqQuestionEs(q,u))+'</b><span class="study-question-es">'+eqEsc(q)+'</span>';}
 
 const PREA1_WRITING_ES = {
  'PREA1-01':[['Observa las letras y reconoce su orden de la A a la Z. No necesitas escribir el alfabeto de memoria.','Usa la tabla del alfabeto de esta unidad. Señala o repasa las letras en orden.'],['Identifica las cinco vocales y luego reconoce las demás consonantes.','Las vocales son A, E, I, O y U. Las otras letras son consonantes.'],['Mira cinco palabras conocidas e identifica la primera letra de cada una.','Ejemplo: apple empieza con A; book empieza con B; cat empieza con C.']],
